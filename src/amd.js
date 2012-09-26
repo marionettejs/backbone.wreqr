@@ -12,6 +12,7 @@
 
   } 
 }(this, function (_, Backbone) {
+  "option strict";
 
   //= wreqr.js
   return Marionette.Wreqr; 

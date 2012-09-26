@@ -1,4 +1,5 @@
 Backbone.Marionette.Wreqr = (function(Backbone, Marionette, _){
+  "option strict";
   var Wreqr = {};
 
   //= wreqr.core.js

@@ -1,16 +1,20 @@
-if (Backbone && Backbone.Marionette && Backbone.Marionette.Application){
-  var commands = new Wreqr.Commands();
-  var reqres = new Wreqr.RequestResponse();
+(function(){
+  "option strict";
 
-  _.extend(Backbone.Marionette.Application.prototype, {
-    commands: commands,
-    execute: function(name, argObj){
-      commands.execute(name, argObj);
-    },
+  if (Backbone && Backbone.Marionette && Backbone.Marionette.Application){
+    var commands = new Wreqr.Commands();
+    var reqres = new Wreqr.RequestResponse();
 
-    requestResponse: reqres,
-    request: function(name, argObj){
-      return commands.request(name, argObj);
-    }
-  });
-}
+    _.extend(Backbone.Marionette.Application.prototype, {
+      commands: commands,
+      execute: function(name, argObj){
+        commands.execute(name, argObj);
+      },
+
+      requestResponse: reqres,
+      request: function(name, argObj){
+        return commands.request(name, argObj);
+      }
+    });
+  }
+})();

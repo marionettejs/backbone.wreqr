@@ -1,4 +1,5 @@
 Wreqr.Handlers = (function(Backbone, _){
+  "option strict";
   
   var Handlers = function(){
     "use strict";
