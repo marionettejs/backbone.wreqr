@@ -78,6 +78,7 @@ module.exports = function(grunt) {
         Backbone: true,
         _: true,
         Marionette: true,
+        Wreqr: true,
         $: true,
         slice: true
       }

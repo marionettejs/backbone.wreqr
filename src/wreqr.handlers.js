@@ -26,7 +26,7 @@ Wreqr.Handlers = (function(Backbone, _){
 
       return function(){
         return config.callback.apply(config.context, arguments);
-      }
+      };
     },
 
     removeHandler: function(name){
