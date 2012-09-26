@@ -2,7 +2,7 @@ Backbone.Marionette.Wreqr = (function(Backbone, Marionette, _){
   "option strict";
   var Wreqr = {};
 
-  //= wreqr.core.js
+  //= wreqr.handlers.js
   //= wreqr.commands.js
   //= wreqr.requestresponse.js
   //= wreqr.marionetteapp.js
