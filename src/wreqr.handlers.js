@@ -4,7 +4,7 @@ Wreqr.Handlers = function(){
 };
 
 _.extend(Wreqr.Handlers.prototype, {
-  register: function(name, handler, context){
+  addHandler: function(name, handler, context){
     var config = {
       callback: handler,
       context: context
@@ -13,21 +13,23 @@ _.extend(Wreqr.Handlers.prototype, {
     this._handlers[name] = config;
   },
 
-  getHandler: function(name, args){
+  getHandler: function(name){
     var config = this._handlers[name];
 
     if (!config){
       throw new Error("Handler not found for '" + name + "'");
     }
 
-    return config;
+    return function(){
+      return config.callback.apply(config.context, arguments);
+    }
   },
 
   removeHandler: function(name){
     delete this._handlers[name];
   },
 
-  clearHandlers: function(){
+  removeAllHandlers: function(){
     this._handlers = {};
   }
 });
