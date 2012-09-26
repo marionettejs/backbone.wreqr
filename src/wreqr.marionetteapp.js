@@ -13,7 +13,7 @@
 
       requestResponse: reqres,
       request: function(name, argObj){
-        return commands.request(name, argObj);
+        return reqres.request(name, argObj);
       }
     });
   }
