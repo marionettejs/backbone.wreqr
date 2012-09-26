@@ -18,7 +18,7 @@ describe("commands", function(){
     });
   });
 
-  describe("when executing a command with parameters", function(){
+  describe("when executing a command with a parameter", function(){
     var commands, result, param;
 
     beforeEach(function(){
