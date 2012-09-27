@@ -21,6 +21,24 @@ from the links below.
 
 ## Basic Use
 
+### Event Aggregator
+
+An event aggregator implementation. It extends from `Backbone.Events` to
+provide the core event handling code in an object that can itself be
+extended and instantiated as needed.
+
+```js
+var vent = new Backbone.Wreqr.EventAggregator();
+
+vent.on("foo", function(){
+  console.log("foo event");
+});
+
+vent.trigger("foo");
+```
+
+### Commands And Request / Response
+
 Wreqr can be used by instantiating a `Backbone.Wreqr.Commands`
 or `Backbone.Wreqr.RequestResponse` object. These objects provide an
 `addHandler` method to add a handler for a named request or command.
@@ -62,6 +80,25 @@ functions.
 reqres.removeHandler("foo");
 
 commands.removeAllHandlers();
+```
+
+### Extending Wreqr Objects
+
+The EventAggregator, Commands and RequestResponse objects can all be
+extended using Backbone's standard `extend` method.
+
+```js
+var MyEventAgg = Backbone.Wreqr.EventAggregator.extend({
+  foo: function(){...}
+});
+
+var MyCommands = Backbone.Wreqr.Commands.extend({
+  foo: function(){...}
+});
+
+var MyReqRes = Backbone.Wreqr.RequestResponse.extend({
+  foo: function(){...}
+});
 ```
 
 ## License
