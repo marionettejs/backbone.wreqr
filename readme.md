@@ -1,6 +1,8 @@
 # Backbone.Wreqr
 
-A simple message bus for Backbone and Backbone.Marionette
+A simple infrastructure based on [messaging patterns](http://www.eaipatterns.com/)
+and service bus implementations for decoupling [Backbone](http://backbonejs.org) 
+and [Backbone.Marionette](http://marionettejs.com) applications.
 
 ## Downloads And Source
 
