@@ -1,4 +1,4 @@
-Backbone.Marionette.Wreqr = (function(Backbone, Marionette, _){
+Backbone.Wreqr = (function(Backbone, Marionette, _){
   "option strict";
   var Wreqr = {};
 

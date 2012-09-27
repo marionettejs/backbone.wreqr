@@ -1,4 +1,4 @@
-# Marionette.Wreqr
+# Backbone.Wreqr
 
 A simple message bus for Backbone and Backbone.Marionette
 
@@ -9,21 +9,61 @@ from the links below.
 
 ### Standard Builds
 
-* Development: [marionette.wreqr.js](https://raw.github.com/marionettejs/marionette.wreqr/master/lib/marionette.wreqr.js)
+* Development: [backbone.wreqr.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/backbone.wreqr.js)
 
-* Production: [marionette.wreqr.min.js](https://raw.github.com/marionettejs/marionette.wreqr/master/lib/marionette.wreqr.min.js)
+* Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/backbone.wreqr.min.js)
 
 ### RequireJS (AMD) Builds
 
-* Development: [marionette.wreqr.js](https://raw.github.com/marionettejs/marionette.wreqr/master/lib/amd/marionette.wreqr.js)
+* Development: [backbone.wreqr.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.js)
 
-* Production: [marionette.wreqr.min.js](https://raw.github.com/marionettejs/marionette.wreqr/master/lib/amd/marionette.wreqr.min.js)
+* Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.min.js)
 
 ## Basic Use
 
+Wreqr can be used by instantiating a `Backbone.Wreqr.Commands`
+or `Backbone.Wreqr.RequestResponse` object. These objects provide an
+`addHandler` method to add a handler for a named request or command.
+Commands can then be executed with the `execute` method, and 
+request/response can be done through the `request` method.
+
+### Commands
+
 ```js
+var commands = new Backbone.Wreqr.Commands();
+
+commands.addHandler("foo", function(){
+  console.log("the foo command was executed");
+});
+
+commands.execute("foo");
+```
+
+### Request/Response
+
+```js
+var reqres = new Backbone.Wreqr.RequestResponse();
+
+reqres.addHandler("foo", function(){
+  return "foo requested. this is the response";
+});
+
+var result = reqres.request("foo");
+console.log(result);
+```
+
+### Removing Handlers
+
+Removing handlers for commands or requests is done the
+same way, with the `removeHandler` or `removeAllHandlers`
+functions.
+
+```js
+reqres.removeHandler("foo");
+
+commands.removeAllHandlers();
 ```
 
 ## License
 
-MIT - see [LICENSE.md](https://raw.github.com/marionettejs/marionette.wreqr/master/LICENSE.md)
+MIT - see [LICENSE.md](https://raw.github.com/marionettejs/backbone.wreqr/master/LICENSE.md)

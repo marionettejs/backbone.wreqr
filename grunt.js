@@ -8,10 +8,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     meta: {
       version: '0.0.0',
-      banner: '// Marionette.Wreqr, v<%= meta.version %>\n' +
+      banner: '// Backbone.Wreqr, v<%= meta.version %>\n' +
         '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' + 
         '// Distributed under MIT license\n' + 
-        '// http://github.com/marionettejs/marionette.wreqr'
+        '// http://github.com/marionettejs/backbone.wreqr'
     },
 
     lint: {
@@ -21,22 +21,22 @@ module.exports = function(grunt) {
     rig: {
       build: {
         src: ['<banner:meta.banner>', 'src/wreqr.js'],
-        dest: 'lib/marionette.wreqr.js'
+        dest: 'lib/backbone.wreqr.js'
       },
       amd: {
         src: ['<banner:meta.banner>', 'src/amd.js'],
-        dest: 'lib/amd/marionette.wreqr.js'
+        dest: 'lib/amd/backbone.wreqr.js'
       }
     },
 
     min: {
       standard: {
         src: ['<banner:meta.banner>', '<config:rig.build.dest>'],
-        dest: 'lib/marionette.wreqr.min.js'
+        dest: 'lib/backbone.wreqr.min.js'
       },
       amd: {
         src: ['<banner:meta.banner>', '<config:rig.amd.dest>'],
-        dest: 'lib/amd/marionette.wreqr.min.js'
+        dest: 'lib/amd/backbone.wreqr.min.js'
       },
     },
 
@@ -46,8 +46,8 @@ module.exports = function(grunt) {
         'public/javascripts/jquery.js',
         'public/javascripts/underscore.js',
         'public/javascripts/backbone.js',
-        'spec/javascripts/support/wreqrHelper.js',
         'src/wreqr.js',
+        'spec/javascripts/support/wreqrHelper.js',
         'src/wreqr.handlers.js',
         'src/wreqr.*.js'
       ],

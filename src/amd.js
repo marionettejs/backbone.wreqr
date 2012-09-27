@@ -15,7 +15,7 @@
   "option strict";
 
   //= wreqr.js
-  return Marionette.Wreqr; 
+  return Backbone.Wreqr; 
 
 }));
 

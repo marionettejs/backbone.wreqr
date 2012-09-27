@@ -1,4 +1,4 @@
-# Marionette.Wreqr
+# Backbone.Wreqr
 
 Copyright (C)2012 Derick Bailey, Muted Solutions, LLC
 
