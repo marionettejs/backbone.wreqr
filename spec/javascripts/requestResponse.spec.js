@@ -36,5 +36,25 @@ describe("request/response", function(){
     });
   });
 
+  describe("when requesting a response, with multiple parameters", function(){
+    var reqres, result, param1, param2;
+
+    beforeEach(function(){
+      reqres = new Wreqr.RequestResponse();
+
+      reqres.addHandler("do:it", function(p, p2){
+        param1 = p;
+        param2= p2;
+      });
+
+      result = reqres.request("do:it", "foo", "bar");
+    });
+
+    it("should pass the param along", function(){
+      expect(param1).toBe("foo");
+      expect(param2).toBe("bar");
+    });
+  });
+
 });
 
