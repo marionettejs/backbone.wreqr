@@ -7,8 +7,11 @@ Wreqr.RequestResponse = (function(Wreqr){
   "option strict";
 
   return Wreqr.Handlers.extend({
-    request: function(name, args){
-      return this.getHandler(name)(args);
+    request: function(){
+      var name = arguments[0];
+      var args = Array.prototype.slice.call(arguments, 1);
+
+      return this.getHandler(name).apply(this, args);
     }
   });
 
