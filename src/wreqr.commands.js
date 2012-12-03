@@ -8,7 +8,10 @@ Wreqr.Commands = (function(Wreqr){
 
   return Wreqr.Handlers.extend({
     execute: function(name, args){
-      this.getHandler(name)(args);
+      var name = arguments[0];
+      var args = Array.prototype.slice.call(arguments, 1);
+
+      this.getHandler(name).apply(this, args);
     }
   });
 

@@ -36,4 +36,24 @@ describe("commands", function(){
     });
   });
 
+  describe("when executing with multiple parameters", function(){
+    var commands, result, param1, param2;
+
+    beforeEach(function(){
+      commands = new Wreqr.Commands();
+
+      commands.addHandler("do:it", function(p, p2){
+        param1 = p;
+        param2= p2;
+      });
+
+      commands.execute("do:it", "foo", "bar");
+    });
+
+    it("should pass the param along", function(){
+      expect(param1).toBe("foo");
+      expect(param2).toBe("bar");
+    });
+  });
+
 });
