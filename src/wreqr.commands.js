@@ -7,7 +7,7 @@ Wreqr.Commands = (function(Wreqr){
   "option strict";
 
   return Wreqr.Handlers.extend({
-    execute: function(name, args){
+    execute: function(){
       var name = arguments[0];
       var args = Array.prototype.slice.call(arguments, 1);
 
