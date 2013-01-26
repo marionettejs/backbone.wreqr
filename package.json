@@ -46,5 +46,15 @@
     "grunt": "*",
     "grunt-jasmine-runner": "latest",
     "grunt-rigger": "*"
+  },
+  "jam":{
+    "dependencies": {
+      "backbone": ">=0.9.9"
+    },
+    "main": "lib/amd/backbone.wreqr.js",
+    "include": [
+      "lib/amd/backbone.wreqr.js",
+      "readme.md"
+    ]
   }
 }
