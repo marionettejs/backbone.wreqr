@@ -12,7 +12,7 @@
 
   } 
 }(this, function (_, Backbone) {
-  "option strict";
+  "use strict";
 
   //= wreqr.js
   return Backbone.Wreqr; 

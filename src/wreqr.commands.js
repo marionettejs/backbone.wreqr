@@ -4,7 +4,7 @@
 // A simple command pattern implementation. Register a command
 // handler and execute it.
 Wreqr.Commands = (function(Wreqr){
-  "option strict";
+  "use strict";
 
   return Wreqr.Handlers.extend({
     execute: function(){

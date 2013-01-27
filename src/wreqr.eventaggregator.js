@@ -4,7 +4,7 @@
 // of an application through event-driven architecture.
 
 Wreqr.EventAggregator = (function(Backbone, _){
-  "option strict";
+  "use strict";
   var EA = function(){};
 
   // Copy the `extend` function used by Backbone's classes

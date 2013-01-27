@@ -3,13 +3,12 @@
 // A registry of functions to call, given a name
 
 Wreqr.Handlers = (function(Backbone, _){
-  "option strict";
+  "use strict";
   
   // Constructor
   // -----------
 
   var Handlers = function(){
-    "use strict";
     this._handlers = {};
   };
 

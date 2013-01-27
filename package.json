@@ -1,7 +1,7 @@
 {
   "name": "Backbone.Wreqr",
   "description": "A Simple Service Bus For Backbone and Backbone.Marionette",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/marionettejs/backbone.wreqr",
   "keywords": [
     "backbone",

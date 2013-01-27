@@ -1,5 +1,10 @@
 # Change log
 
+### v0.1.1
+
+* Fixed "option strict" to be "use strict" ... #facepalm :P
+* Added jam package config
+
 ### v0.1.0
 
 * Fix calls to `.apply` to account for IE < 9 throwing an error when `arguments` is null or undefined
