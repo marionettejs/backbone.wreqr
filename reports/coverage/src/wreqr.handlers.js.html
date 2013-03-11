@@ -181,16 +181,16 @@
     <h1>Code coverage report for <span class='entity'>src/wreqr.handlers.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>100% <small>(17 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>100% <small>(19 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Branches: <span class='metric'>100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(7 / 7)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>100% <small>(8 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(17 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>100% <small>(19 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; wreqr.handlers.js</div>
@@ -258,7 +258,14 @@
 59
 60
 61
-62</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+62
+63
+64
+65
+66
+67
+68
+69</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -269,7 +276,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">15</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
@@ -282,27 +289,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">14</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">12</span>
 <span class="cline-any cline-yes">3</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8</span>
-<span class="cline-any cline-yes">8</span>
-<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -330,7 +344,7 @@ Wreqr.Handlers = (function(Backbone, _){
   // -----------
 &nbsp;
   var Handlers = function(){
-    this._handlers = {};
+    this._wreqrHandlers = {};
   };
 &nbsp;
   Handlers.extend = Backbone.Model.extend;
@@ -338,7 +352,7 @@ Wreqr.Handlers = (function(Backbone, _){
   // Instance Members
   // ----------------
 &nbsp;
-  _.extend(Handlers.prototype, {
+  _.extend(Handlers.prototype, Backbone.Events, {
 &nbsp;
     // Add a handler for the given name, with an
     // optional context to run the handler within
@@ -348,14 +362,21 @@ Wreqr.Handlers = (function(Backbone, _){
         context: context
       };
 &nbsp;
-      this._handlers[name] = config;
+      this._wreqrHandlers[name] = config;
+&nbsp;
+      this.trigger("handler:add", name, handler, context);
+    },
+&nbsp;
+    // Determine whether or not a handler is registered
+    hasHandler: function(name){
+      return !! this._wreqrHandlers[name];
     },
 &nbsp;
     // Get the currently registered handler for
     // the specified name. Throws an exception if
     // no handler is found.
     getHandler: function(name){
-      var config = this._handlers[name];
+      var config = this._wreqrHandlers[name];
 &nbsp;
       if (!config){
         throw new Error("Handler not found for '" + name + "'");
@@ -369,12 +390,12 @@ Wreqr.Handlers = (function(Backbone, _){
 &nbsp;
     // Remove a handler for the specified name
     removeHandler: function(name){
-      delete this._handlers[name];
+      delete this._wreqrHandlers[name];
     },
 &nbsp;
     // Remove all handlers from this registry
     removeAllHandlers: function(){
-      this._handlers = {};
+      this._wreqrHandlers = {};
     }
   });
 &nbsp;
@@ -385,7 +406,7 @@ Wreqr.Handlers = (function(Backbone, _){
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Mar 11 2013 13:55:03 GMT-0500 (CDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Mar 11 2013 14:47:21 GMT-0500 (CDT)</div>
 </div>
 </body>
 
