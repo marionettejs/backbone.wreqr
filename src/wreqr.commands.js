@@ -48,10 +48,13 @@ Wreqr.Commands = (function(Wreqr){
     // Internal method to initialize storage either from the type's
     // `storageType` or the instance `options.storageType`.
     _initializeStorage: function(options){
-      var storage = options.storageType || this.storageType;
+      var storage;
 
-      if (_.isFunction(storage)){
-        storage = new storage();
+      var StorageType = options.storageType || this.storageType;
+      if (_.isFunction(StorageType)){
+        storage = new StorageType();
+      } else {
+        storage = StorageType;
       }
 
       this.storage = storage;

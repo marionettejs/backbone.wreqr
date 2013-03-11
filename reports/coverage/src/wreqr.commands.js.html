@@ -181,16 +181,16 @@
     <h1>Code coverage report for <span class='entity'>src/wreqr.commands.js</span></h1>
     <h2>
         
-        Statements: <span class='metric'>100% <small>(16 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class='metric'>100% <small>(23 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class='metric'>100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class='metric'>100% <small>(8 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class='metric'>100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class='metric'>100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class='metric'>100% <small>(16 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class='metric'>100% <small>(23 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; wreqr.commands.js</div>
@@ -241,7 +241,27 @@
 42
 43
 44
-45</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -251,11 +271,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6</span>
-<span class="cline-any cline-yes">6</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6</span>
-<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -285,6 +310,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Wreqr.Commands
 // --------------
 //
@@ -294,9 +334,14 @@ Wreqr.Commands = (function(Wreqr){
   "use strict";
 &nbsp;
   return Wreqr.Handlers.extend({
-    constructor: function(){
-      this.storage = new Wreqr.CommandStorage();
-      this.on("handler:add", this.executeCommands, this);
+    // default storage type
+    storageType: Wreqr.CommandStorage,
+&nbsp;
+    constructor: function(options){
+      this.options = options || {};
+&nbsp;
+      this._initializeStorage(this.options);
+      this.on("handler:add", this._executeCommands, this);
 &nbsp;
       var args = Array.prototype.slice.call(arguments);
       Wreqr.Handlers.prototype.constructor.apply(this, args);
@@ -316,7 +361,7 @@ Wreqr.Commands = (function(Wreqr){
     },
 &nbsp;
     // Internal method to handle bulk execution of stored commands
-    executeCommands: function(name, handler, context){
+    _executeCommands: function(name, handler, context){
       var command = this.storage.getCommands(name);
 &nbsp;
       // loop through and execute all the stored command instances
@@ -325,6 +370,21 @@ Wreqr.Commands = (function(Wreqr){
       });
 &nbsp;
       this.storage.clearCommands(name);
+    },
+&nbsp;
+    // Internal method to initialize storage either from the type's
+    // `storageType` or the instance `options.storageType`.
+    _initializeStorage: function(options){
+      var storage;
+&nbsp;
+      var StorageType = options.storageType || this.storageType;
+      if (_.isFunction(StorageType)){
+        storage = new StorageType();
+      } else {
+        storage = StorageType;
+      }
+&nbsp;
+      this.storage = storage;
     }
   });
 &nbsp;
@@ -334,7 +394,7 @@ Wreqr.Commands = (function(Wreqr){
 
 </div>
 <div class='footer'>
-    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Mar 11 2013 14:47:21 GMT-0500 (CDT)</div>
+    <div class='meta'>Generated by <a href='http://istanbul-js.org' target='_blank'>istanbul</a> at Mon Mar 11 2013 16:28:12 GMT-0500 (CDT)</div>
 </div>
 </body>
 
