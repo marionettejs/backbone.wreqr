@@ -14,7 +14,7 @@
 }(this, function (_, Backbone) {
   "use strict";
 
-  //= wreqr.js
+  // @include wreqr.js
   return Backbone.Wreqr; 
 
 }));

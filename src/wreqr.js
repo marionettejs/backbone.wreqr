@@ -2,11 +2,11 @@ Backbone.Wreqr = (function(Backbone, Marionette, _){
   "use strict";
   var Wreqr = {};
 
-  //= wreqr.handlers.js
-  //= wreqr.commandStorage.js
-  //= wreqr.commands.js
-  //= wreqr.requestresponse.js
-  //= wreqr.eventaggregator.js
+  // @include wreqr.handlers.js
+  // @include wreqr.commandStorage.js
+  // @include wreqr.commands.js
+  // @include wreqr.requestresponse.js
+  // @include wreqr.eventaggregator.js
 
   return Wreqr;
 })(Backbone, Backbone.Marionette, _);
