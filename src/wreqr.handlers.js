@@ -9,7 +9,7 @@ Wreqr.Handlers = (function(Backbone, _){
   // -----------
 
   var Handlers = function(){
-    this._handlers = {};
+    this._wreqrHandlers = {};
   };
 
   Handlers.extend = Backbone.Model.extend;
@@ -17,7 +17,7 @@ Wreqr.Handlers = (function(Backbone, _){
   // Instance Members
   // ----------------
 
-  _.extend(Handlers.prototype, {
+  _.extend(Handlers.prototype, Backbone.Events, {
 
     // Add a handler for the given name, with an
     // optional context to run the handler within
@@ -27,14 +27,21 @@ Wreqr.Handlers = (function(Backbone, _){
         context: context
       };
 
-      this._handlers[name] = config;
+      this._wreqrHandlers[name] = config;
+
+      this.trigger("handler:add", name, handler, context);
+    },
+
+    // Determine whether or not a handler is registered
+    hasHandler: function(name){
+      return !! this._wreqrHandlers[name];
     },
 
     // Get the currently registered handler for
     // the specified name. Throws an exception if
     // no handler is found.
     getHandler: function(name){
-      var config = this._handlers[name];
+      var config = this._wreqrHandlers[name];
 
       if (!config){
         throw new Error("Handler not found for '" + name + "'");
@@ -48,12 +55,12 @@ Wreqr.Handlers = (function(Backbone, _){
 
     // Remove a handler for the specified name
     removeHandler: function(name){
-      delete this._handlers[name];
+      delete this._wreqrHandlers[name];
     },
 
     // Remove all handlers from this registry
     removeAllHandlers: function(){
-      this._handlers = {};
+      this._wreqrHandlers = {};
     }
   });
 

@@ -1,5 +1,26 @@
 describe("handlers", function(){
 
+  describe("when adding a handler", function(){
+    var handlers, handler, addHandleredHandler, ctx;
+
+    beforeEach(function(){
+      handlers = new Wreqr.Handlers();
+      spyOn(handlers, "trigger");
+
+      ctx = {};
+      addHandleredHandler = jasmine.createSpy("a addHandlered handler");
+
+      handlers.addHandler("foo", addHandleredHandler, ctx);
+
+      handler = handlers.getHandler("foo");
+      handler();
+    });
+
+    it("should trigger a handler:add event", function(){
+      expect(handlers.trigger).toHaveBeenCalledWith("handler:add", "foo", addHandleredHandler, ctx);
+    });
+  });
+
   describe("when requesting a handler by name", function(){
 
     describe("and a handler has been addHandlered with that name", function(){
