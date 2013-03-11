@@ -1,5 +1,9 @@
 # Change log
 
+### v0.2.0
+
+* Updated build process to use Grunt v0.4
+
 ### v0.1.1
 
 * Fixed "option strict" to be "use strict" ... #facepalm :P

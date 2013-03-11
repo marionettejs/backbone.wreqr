@@ -1,1 +1,3 @@
-window.Wreqr = Backbone.Wreqr;
+(function(global){
+  global.Wreqr = Backbone.Wreqr;
+})(this);

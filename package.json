@@ -44,8 +44,15 @@
 
   "devDependencies": {
     "grunt": "*",
-    "grunt-jasmine-runner": "latest",
-    "grunt-rigger": "*"
+    "grunt-contrib-jasmine": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-template-jasmine-istanbul": "*",
+    "grunt-preprocess": "*",
+    "grunt-plato": "*"
   },
   "jam":{
     "dependencies": {
