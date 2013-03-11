@@ -8,8 +8,13 @@ Wreqr.Handlers = (function(Backbone, _){
   // Constructor
   // -----------
 
-  var Handlers = function(){
+  var Handlers = function(options){
+    this.options = options;
     this._wreqrHandlers = {};
+    
+    if (_.isFunction(this.initialize)){
+      this.initialize(options);
+    }
   };
 
   Handlers.extend = Backbone.Model.extend;

@@ -10,6 +10,9 @@
   * When a handler for a stored command is added, the stored command will be
     executed
 
+* Handlers (Commands/RequestResponse)
+  * Allow an `initialize` function when extending from the base type
+
 ### v0.1.1
 
 * Fixed "option strict" to be "use strict" ... #facepalm :P

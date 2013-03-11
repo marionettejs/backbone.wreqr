@@ -3,6 +3,7 @@ Backbone.Wreqr = (function(Backbone, Marionette, _){
   var Wreqr = {};
 
   //= wreqr.handlers.js
+  //= wreqr.commandStorage.js
   //= wreqr.commands.js
   //= wreqr.requestresponse.js
   //= wreqr.eventaggregator.js

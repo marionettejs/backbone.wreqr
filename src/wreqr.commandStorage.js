@@ -6,8 +6,13 @@ Wreqr.CommandStorage = (function(){
   "use strict";
 
   // Constructor function
-  var CommandStorage = function(){
+  var CommandStorage = function(options){
+    this.options = options;
     this._commands = {};
+
+    if (_.isFunction(this.initialize)){
+      this.initialize(options);
+    }
   };
 
   // Instance methods

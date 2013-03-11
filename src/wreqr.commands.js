@@ -7,9 +7,14 @@ Wreqr.Commands = (function(Wreqr){
   "use strict";
 
   return Wreqr.Handlers.extend({
-    constructor: function(){
-      this.storage = new Wreqr.CommandStorage();
-      this.on("handler:add", this.executeCommands, this);
+    // default storage type
+    storageType: Wreqr.CommandStorage,
+
+    constructor: function(options){
+      this.options = options || {};
+
+      this._initializeStorage(this.options);
+      this.on("handler:add", this._executeCommands, this);
 
       var args = Array.prototype.slice.call(arguments);
       Wreqr.Handlers.prototype.constructor.apply(this, args);
@@ -29,7 +34,7 @@ Wreqr.Commands = (function(Wreqr){
     },
 
     // Internal method to handle bulk execution of stored commands
-    executeCommands: function(name, handler, context){
+    _executeCommands: function(name, handler, context){
       var command = this.storage.getCommands(name);
 
       // loop through and execute all the stored command instances
@@ -38,6 +43,18 @@ Wreqr.Commands = (function(Wreqr){
       });
 
       this.storage.clearCommands(name);
+    },
+
+    // Internal method to initialize storage either from the type's
+    // `storageType` or the instance `options.storageType`.
+    _initializeStorage: function(options){
+      var storage = options.storageType || this.storageType;
+
+      if (_.isFunction(storage)){
+        storage = new storage();
+      }
+
+      this.storage = storage;
     }
   });
 
