@@ -43,7 +43,7 @@ vent.trigger("foo");
 
 Wreqr can be used by instantiating a `Backbone.Wreqr.Commands`
 or `Backbone.Wreqr.RequestResponse` object. These objects provide an
-`addHandler` method to add a handler for a named request or command.
+`setHandler` method to add a handler for a named request or command.
 Commands can then be executed with the `execute` method, and 
 request/response can be done through the `request` method.
 
@@ -52,7 +52,7 @@ request/response can be done through the `request` method.
 ```js
 var commands = new Backbone.Wreqr.Commands();
 
-commands.addHandler("foo", function(){
+commands.setHandler("foo", function(){
   console.log("the foo command was executed");
 });
 
@@ -64,13 +64,41 @@ commands.execute("foo");
 ```js
 var reqres = new Backbone.Wreqr.RequestResponse();
 
-reqres.addHandler("foo", function(){
+reqres.setHandler("foo", function(){
   return "foo requested. this is the response";
 });
 
 var result = reqres.request("foo");
 console.log(result);
 ```
+
+### Adding Multiple Handlers
+
+Multiple handlers can be set on the Commands and RequestResponse
+objects in a single call, using the `setHandlers` method and supplying
+a `{"name": configuration}` hash where the `configuration` is an
+object literal or a function.
+
+```js
+var reqres = new Backbone.Wreqr.RequestResponse();
+
+reqres.setHandlers({
+  "foo": function(){ /* ... */ },
+  "bar": {
+    callback: function(){ /* ... */ },
+    context: someObject
+  }
+});
+
+var result = reqres.request("foo");
+```
+
+The "foo" handler is assigned directly to a function, while the
+"bar" handler is assigned to a function with a specific context
+to execute the function within.
+
+This works for all `Handlers`, `Commands` and `RequestResponse`
+objects.
 
 ### Removing Handlers
 

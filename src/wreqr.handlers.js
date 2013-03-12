@@ -24,6 +24,20 @@ Wreqr.Handlers = (function(Backbone, _){
 
   _.extend(Handlers.prototype, Backbone.Events, {
 
+    // Add multiple handlers using an object literal configuration
+    setHandlers: function(handlers){
+      _.each(handlers, function(handler, name){
+        var context = null;
+
+        if (_.isObject(handler) && !_.isFunction(handler)){
+          context = handler.context;
+          handler = handler.callback;
+        }
+
+        this.setHandler(name, handler, context);
+      }, this);
+    },
+
     // Add a handler for the given name, with an
     // optional context to run the handler within
     setHandler: function(name, handler, context){

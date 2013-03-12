@@ -5,6 +5,7 @@
 * Handlers (Commands/RequestResponse)
   * **BREAKING:** renamed `addHandler` to `setHandler` to clarify the point of single handlers per named item
   * Allow an `initialize` function when extending from the base type
+  * Added a `setHandlers` function that takes an object literal as the parameter, to configure multiple handlers in a single call
 
 * Commands
   * Introduced Wreqr.CommandStorage to store commands for later execution
