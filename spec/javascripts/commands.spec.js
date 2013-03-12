@@ -6,7 +6,7 @@ describe("commands", function(){
     beforeEach(function(){
       commands = new Wreqr.Commands();
 
-      commands.addHandler("do:it", function(){
+      commands.setHandler("do:it", function(){
         return "some value";
       });
 
@@ -24,7 +24,7 @@ describe("commands", function(){
     beforeEach(function(){
       commands = new Wreqr.Commands();
 
-      commands.addHandler("do:it", function(p){
+      commands.setHandler("do:it", function(p){
         param = p;
       });
 
@@ -42,7 +42,7 @@ describe("commands", function(){
     beforeEach(function(){
       commands = new Wreqr.Commands();
 
-      commands.addHandler("do:it", function(p, p2){
+      commands.setHandler("do:it", function(p, p2){
         param1 = p;
         param2= p2;
       });

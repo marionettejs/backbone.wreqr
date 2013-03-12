@@ -1,53 +1,53 @@
 describe("handlers", function(){
 
   describe("when adding a handler", function(){
-    var handlers, handler, addHandleredHandler, ctx;
+    var handlers, handler, setHandleredHandler, ctx;
 
     beforeEach(function(){
       handlers = new Wreqr.Handlers();
       spyOn(handlers, "trigger");
 
       ctx = {};
-      addHandleredHandler = jasmine.createSpy("a addHandlered handler");
+      setHandleredHandler = jasmine.createSpy("a setHandlered handler");
 
-      handlers.addHandler("foo", addHandleredHandler, ctx);
+      handlers.setHandler("foo", setHandleredHandler, ctx);
 
       handler = handlers.getHandler("foo");
       handler();
     });
 
     it("should trigger a handler:add event", function(){
-      expect(handlers.trigger).toHaveBeenCalledWith("handler:add", "foo", addHandleredHandler, ctx);
+      expect(handlers.trigger).toHaveBeenCalledWith("handler:add", "foo", setHandleredHandler, ctx);
     });
   });
 
   describe("when requesting a handler by name", function(){
 
-    describe("and a handler has been addHandlered with that name", function(){
-      var handler, addHandleredHandler, ctx;
+    describe("and a handler has been setHandlered with that name", function(){
+      var handler, setHandleredHandler, ctx;
 
       beforeEach(function(){
         var handlers = new Wreqr.Handlers();
 
         ctx = {};
-        addHandleredHandler = jasmine.createSpy("a addHandlered handler");
-        handlers.addHandler("handler", addHandleredHandler, ctx);
+        setHandleredHandler = jasmine.createSpy("a setHandlered handler");
+        handlers.setHandler("handler", setHandleredHandler, ctx);
 
         handler = handlers.getHandler("handler");
         handler();
       });
 
-      it("should return the addHandlered handler callback", function(){
-        expect(addHandleredHandler).toHaveBeenCalled();
+      it("should return the setHandlered handler callback", function(){
+        expect(setHandleredHandler).toHaveBeenCalled();
       });
 
-      it("should return the addHandlered handler context", function(){
-        expect(addHandleredHandler.mostRecentCall.object).toBe(ctx);
+      it("should return the setHandlered handler context", function(){
+        expect(setHandleredHandler.mostRecentCall.object).toBe(ctx);
       });
 
     });
 
-    describe("and a handler has not been addHandlered with that name", function(){
+    describe("and a handler has not been setHandlered with that name", function(){
       var handlers;
 
       beforeEach(function(){
@@ -65,14 +65,14 @@ describe("handlers", function(){
   });
 
   describe("when removing a named handler", function(){
-    var handlers, addHandleredHandler, ctx;
+    var handlers, setHandleredHandler, ctx;
 
     beforeEach(function(){
       handlers = new Wreqr.Handlers();
 
       ctx = {};
-      addHandleredHandler = jasmine.createSpy("a addHandlered handler");
-      handlers.addHandler("handler", addHandleredHandler, ctx);
+      setHandleredHandler = jasmine.createSpy("a setHandlered handler");
+      handlers.setHandler("handler", setHandleredHandler, ctx);
       handlers.removeHandler("handler");
     });
 
@@ -84,15 +84,15 @@ describe("handlers", function(){
   });
 
   describe("when removing all handlers", function(){
-    var handlers, addHandleredHandler, ctx;
+    var handlers, setHandleredHandler, ctx;
 
     beforeEach(function(){
       handlers = new Wreqr.Handlers();
 
       ctx = {};
-      addHandleredHandler = jasmine.createSpy("a addHandlered handler");
-      handlers.addHandler("handler1", addHandleredHandler, ctx);
-      handlers.addHandler("handler2", addHandleredHandler, ctx);
+      setHandleredHandler = jasmine.createSpy("a setHandlered handler");
+      handlers.setHandler("handler1", setHandleredHandler, ctx);
+      handlers.setHandler("handler2", setHandleredHandler, ctx);
 
       handlers.removeAllHandlers();
     });

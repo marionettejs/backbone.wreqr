@@ -26,7 +26,7 @@ describe("commands - storage", function(){
       commands = new Wreqr.Commands();
       commands.execute("foo", 1, 2);
 
-      commands.addHandler("foo", handler);
+      commands.setHandler("foo", handler);
     });
 
     it("should execute the command with that handler with any supplied args", function(){

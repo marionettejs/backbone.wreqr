@@ -2,7 +2,9 @@
 
 ### v0.2.0
 
-* Updated build process to use Grunt v0.4
+* Handlers (Commands/RequestResponse)
+  * **BREAKING:** renamed `addHandler` to `setHandler` to clarify the point of single handlers per named item
+  * Allow an `initialize` function when extending from the base type
 
 * Commands
   * Introduced Wreqr.CommandStorage to store commands for later execution
@@ -10,8 +12,7 @@
   * When a handler for a stored command is added, the stored command will be
     executed
 
-* Handlers (Commands/RequestResponse)
-  * Allow an `initialize` function when extending from the base type
+* Updated build process to use Grunt v0.4
 
 ### v0.1.1
 

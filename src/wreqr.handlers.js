@@ -26,7 +26,7 @@ Wreqr.Handlers = (function(Backbone, _){
 
     // Add a handler for the given name, with an
     // optional context to run the handler within
-    addHandler: function(name, handler, context){
+    setHandler: function(name, handler, context){
       var config = {
         callback: handler,
         context: context
