@@ -42,7 +42,7 @@ vent.trigger("foo");
 ### Commands And Request / Response
 
 Wreqr can be used by instantiating a `Backbone.Wreqr.Commands`
-or `Backbone.Wreqr.RequestResponse` object. These objects provide an
+or `Backbone.Wreqr.RequestResponse` object. These objects provide a
 `setHandler` method to add a handler for a named request or command.
 Commands can then be executed with the `execute` method, and 
 request/response can be done through the `request` method.
