@@ -1,5 +1,9 @@
 # Change log
 
+### v1.0.0
+  * major version release
+  * minor fixes
+
 ### v0.2.0
 
 * Handlers (Commands/RequestResponse)
