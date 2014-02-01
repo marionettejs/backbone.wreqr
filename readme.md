@@ -1,7 +1,7 @@
 # Backbone.Wreqr
 
 A simple infrastructure based on [messaging patterns](http://www.eaipatterns.com/)
-and service bus implementations for decoupling [Backbone](http://backbonejs.org) 
+and service bus implementations for decoupling [Backbone](http://backbonejs.org)
 and [Backbone.Marionette](http://marionettejs.com) applications.
 
 ## Downloads And Source
@@ -44,7 +44,7 @@ vent.trigger("foo");
 Wreqr can be used by instantiating a `Backbone.Wreqr.Commands`
 or `Backbone.Wreqr.RequestResponse` object. These objects provide a
 `setHandler` method to add a handler for a named request or command.
-Commands can then be executed with the `execute` method, and 
+Commands can then be executed with the `execute` method, and
 request/response can be done through the `request` method.
 
 ### Commands
@@ -134,3 +134,9 @@ var MyReqRes = Backbone.Wreqr.RequestResponse.extend({
 ## License
 
 MIT - see [LICENSE.md](https://raw.github.com/marionettejs/backbone.wreqr/master/LICENSE.md)
+
+## Dev
+* `npm install`
+* `npm install -g grunt-cli`
+* `grunt`
+
