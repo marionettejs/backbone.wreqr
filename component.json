@@ -25,7 +25,8 @@
     "web": "http://derickbailey.lostechies.com"
   },
   "dependencies": {
-    "jashkenas/backbone": "*"
+    "jashkenas/backbone": "*",
+    "jashkenas/underscore": "*"
   },
   "main": "lib/amd/backbone.wreqr.js",
   "scripts": [
