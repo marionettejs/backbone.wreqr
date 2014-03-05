@@ -4,28 +4,12 @@
 
 Wreqr.Handlers = (function(Backbone, _){
   "use strict";
-  
-  // Constructor
-  // -----------
 
-  var Handlers = function(options){
-    this.options = options;
-    this._wreqrHandlers = {};
-    
-    if (_.isFunction(this.initialize)){
-      this.initialize(options);
-    }
-  };
-
-  Handlers.extend = Backbone.Model.extend;
-
-  // Instance Members
-  // ----------------
-
-  _.extend(Handlers.prototype, Backbone.Events, {
+  var Handlers = {
 
     // Add multiple handlers using an object literal configuration
     setHandlers: function(handlers){
+      var handlerName = 'set'+this.type;
       _.each(handlers, function(handler, name){
         var context = null;
 
@@ -34,13 +18,14 @@ Wreqr.Handlers = (function(Backbone, _){
           handler = handler.callback;
         }
 
-        this.setHandler(name, handler, context);
+        this[handlerName](name, handler, context);
       }, this);
     },
 
     // Add a handler for the given name, with an
     // optional context to run the handler within
     setHandler: function(name, handler, context){
+      
       var config = {
         callback: handler,
         context: context
@@ -48,7 +33,7 @@ Wreqr.Handlers = (function(Backbone, _){
 
       this._wreqrHandlers[name] = config;
 
-      this.trigger("handler:add", name, handler, context);
+      this[this.eventContainer].trigger("handler:add", name, handler, context);
     },
 
     // Determine whether or not a handler is registered
@@ -80,8 +65,14 @@ Wreqr.Handlers = (function(Backbone, _){
     // Remove all handlers from this registry
     removeAllHandlers: function(){
       this._wreqrHandlers = {};
+    },
+
+    // Get the name of the property that holds the events container
+    _configureHandlerType: function( type ) {
+      this.eventContainer = t
+      return type + 'Events';
     }
-  });
+  };
 
   return Handlers;
 })(Backbone, _);

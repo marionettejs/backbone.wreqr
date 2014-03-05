@@ -6,27 +6,38 @@
 Wreqr.Commands = (function(Wreqr){
   "use strict";
 
-  return Wreqr.Handlers.extend({
-    // default storage type
-    storageType: Wreqr.CommandStorage,
-
-    constructor: function(options){
+  var Commands = function(options) {
       this.options = options || {};
-
+      this._wreqrHandlers = {};
       this._initializeStorage(this.options);
-      this.on("handler:add", this._executeCommands, this);
 
-      var args = Array.prototype.slice.call(arguments);
-      Wreqr.Handlers.prototype.constructor.apply(this, args);
-    },
+      this.type = 'Command';
+      this.eventContainer = 'commandsEvents';
+      this.commandsEvents = _.extend({}, Backbone.Events);
+
+      this[this.eventContainer].on("handler:add", this._executeCommands, this);
+  };
+
+  Commands.extend = Backbone.Model.extend;
+
+  return Commands.extend({
+
+    setCommands: Wreqr.Handlers.setHandlers,
+    setCommand : Wreqr.Handlers.setHandler,
+    hasCommand : Wreqr.Handlers.hasHandler,
+    getCommand : Wreqr.Handlers.getHandler,
+    removeCommand : Wreqr.Handlers.removeHandler,
+    removeAllCommands: Wreqr.Handlers.removeAllHandlers,
+
+    storageType: Wreqr.CommandStorage,
 
     // Execute a named command with the supplied args
     execute: function(name, args){
       name = arguments[0];
       args = Array.prototype.slice.call(arguments, 1);
 
-      if (this.hasHandler(name)){
-        this.getHandler(name).apply(this, args);
+      if (this.hasCommand(name)){
+        this.getCommand(name).apply(this, args);
       } else {
         this.storage.addCommand(name, args);
       }
@@ -59,6 +70,7 @@ Wreqr.Commands = (function(Wreqr){
 
       this.storage = storage;
     }
+
   });
 
 })(Wreqr);

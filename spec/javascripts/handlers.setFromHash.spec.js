@@ -1,7 +1,7 @@
 describe("handler - set from hash", function(){
 
   describe("when adding multiple handlers via an object literal / hash", function(){
-    var handlers, hndlrs;
+    var HandlersClass, handlers, hndlrs;
 
     beforeEach(function(){
       hndlrs = {
@@ -9,7 +9,17 @@ describe("handler - set from hash", function(){
         "bar": jasmine.createSpy("bar handler")
       };
 
-      handlers = new Wreqr.Handlers();
+      HandlersClass = function(){
+        this._wreqrHandlers = {};
+        this.type = 'Handler';
+        this.eventContainer = 'handlersEvents';
+        this.handlersEvents = _.extend({}, Backbone.Events);
+      };
+      HandlersClass.extend = Backbone.Model.extend;
+      _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+      handlers = new HandlersClass();
+
       handlers.setHandlers(hndlrs);
     });
 
@@ -28,7 +38,7 @@ describe("handler - set from hash", function(){
   });
 
   describe("when the object literal values are objects with a callback and context attribute", function(){
-    var handlers, hndlrs, ctx;
+    var HandlersClass, handlers, hndlrs, ctx;
 
     beforeEach(function(){
       ctx = {};
@@ -40,7 +50,16 @@ describe("handler - set from hash", function(){
         }
       };
 
-      handlers = new Wreqr.Handlers();
+      HandlersClass = function(){
+        this._wreqrHandlers = {};
+        this.type = 'Handler';
+        this.eventContainer = 'handlersEvents';
+        this.handlersEvents = _.extend({}, Backbone.Events);
+      };
+      HandlersClass.extend = Backbone.Model.extend;
+      _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+      handlers = new HandlersClass();
       handlers.setHandlers(hndlrs);
 
       handlers.getHandler("foo")();

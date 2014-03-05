@@ -1,11 +1,21 @@
 describe("handlers", function(){
 
   describe("when adding a handler", function(){
-    var handlers, handler, setHandleredHandler, ctx;
+    var HandlersClass, handlers, handler, setHandleredHandler, ctx;
 
     beforeEach(function(){
-      handlers = new Wreqr.Handlers();
-      spyOn(handlers, "trigger");
+      HandlersClass = function(){
+        this._wreqrHandlers = {};
+        this.type = 'Handler';
+        this.eventContainer = 'handlersEvents';
+        this.handlersEvents = _.extend({}, Backbone.Events);
+      };
+      HandlersClass.extend = Backbone.Model.extend;
+      _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+      handlers = new HandlersClass();
+      
+      spyOn(handlers.handlersEvents, "trigger");
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
@@ -17,17 +27,26 @@ describe("handlers", function(){
     });
 
     it("should trigger a handler:add event", function(){
-      expect(handlers.trigger).toHaveBeenCalledWith("handler:add", "foo", setHandleredHandler, ctx);
+      expect(handlers.handlersEvents.trigger).toHaveBeenCalledWith("handler:add", "foo", setHandleredHandler, ctx);
     });
   });
 
   describe("when requesting a handler by name", function(){
 
     describe("and a handler has been setHandlered with that name", function(){
-      var handler, setHandleredHandler, ctx;
+      var HandlerClass, handler, setHandleredHandler, ctx;
 
       beforeEach(function(){
-        var handlers = new Wreqr.Handlers();
+        HandlersClass = function(){
+        this._wreqrHandlers = {};
+        this.type = 'Handler';
+        this.eventContainer = 'handlersEvents';
+        this.handlersEvents = _.extend({}, Backbone.Events);
+      };
+      HandlersClass.extend = Backbone.Model.extend;
+      _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+      handlers = new HandlersClass();
 
         ctx = {};
         setHandleredHandler = jasmine.createSpy("a setHandlered handler");
@@ -48,10 +67,19 @@ describe("handlers", function(){
     });
 
     describe("and a handler has not been setHandlered with that name", function(){
-      var handlers;
+      var HandlersClass, handlers;
 
       beforeEach(function(){
-        handlers = new Wreqr.Handlers();
+        HandlersClass = function(){
+          this._wreqrHandlers = {};
+          this.type = 'Handler';
+          this.eventContainer = 'handlersEvents';
+          this.handlersEvents = _.extend({}, Backbone.Events);
+        };
+        HandlersClass.extend = Backbone.Model.extend;
+        _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+        handlers = new HandlersClass();
       });
 
       it("should thrown an error saying a handler was not found", function(){
@@ -65,10 +93,19 @@ describe("handlers", function(){
   });
 
   describe("when removing a named handler", function(){
-    var handlers, setHandleredHandler, ctx;
+    var HandlerClass, handlers, setHandleredHandler, ctx;
 
     beforeEach(function(){
-      handlers = new Wreqr.Handlers();
+      HandlersClass = function(){
+        this._wreqrHandlers = {};
+        this.type = 'Handler';
+        this.eventContainer = 'handlersEvents';
+        this.handlersEvents = _.extend({}, Backbone.Events);
+      };
+      HandlersClass.extend = Backbone.Model.extend;
+      _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+      handlers = new HandlersClass();
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
@@ -84,10 +121,19 @@ describe("handlers", function(){
   });
 
   describe("when removing all handlers", function(){
-    var handlers, setHandleredHandler, ctx;
+    var HandlerClass, handlers, setHandleredHandler, ctx;
 
     beforeEach(function(){
-      handlers = new Wreqr.Handlers();
+      HandlersClass = function(){
+        this._wreqrHandlers = {};
+        this.type = 'Handler';
+        this.eventContainer = 'handlersEvents';
+        this.handlersEvents = _.extend({}, Backbone.Events);
+      };
+      HandlersClass.extend = Backbone.Model.extend;
+      _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+      handlers = new HandlersClass();
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");

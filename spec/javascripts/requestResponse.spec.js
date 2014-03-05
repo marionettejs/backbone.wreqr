@@ -6,7 +6,7 @@ describe("request/response", function(){
     beforeEach(function(){
       reqres = new Wreqr.RequestResponse();
 
-      reqres.setHandler("do:it", function(){
+      reqres.setRequest("do:it", function(){
         return "some value";
       });
 
@@ -24,7 +24,7 @@ describe("request/response", function(){
     beforeEach(function(){
       reqres = new Wreqr.RequestResponse();
 
-      reqres.setHandler("do:it", function(p){
+      reqres.setRequest("do:it", function(p){
         param = p;
       });
 
@@ -42,7 +42,7 @@ describe("request/response", function(){
     beforeEach(function(){
       reqres = new Wreqr.RequestResponse();
 
-      reqres.setHandler("do:it", function(p, p2){
+      reqres.setRequest("do:it", function(p, p2){
         param1 = p;
         param2= p2;
       });
