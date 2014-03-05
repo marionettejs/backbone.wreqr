@@ -1,20 +1,32 @@
 describe("handlers", function(){
 
+  var HandlersClass, handlers;
+
+  beforeEach(function(){
+    HandlersClass = function(){
+      this._handlersHandlers = {};
+      this.type = 'Handler';
+      this.eventContainer = 'handlersEvents';
+      this.handlersEvents = _.extend({}, Backbone.Events);
+
+      this.setHandlers = _.bind(Wreqr.Handlers.setHandlers, this, 'Handler');
+      this.setHandler  = _.bind(Wreqr.Handlers.setHandler, this, 'Handler');
+      this.hasHandler  = _.bind(Wreqr.Handlers.hasHandler, this, 'Handler');
+      this.getHandler  = _.bind(Wreqr.Handlers.getHandler, this, 'Handler');
+      this.removeHandler  = _.bind(Wreqr.Handlers.removeHandler, this, 'Handler');
+      this.removeAllHandlers = _.bind(Wreqr.Handlers.removeAllHandlers, this, 'Handler');
+    };
+    HandlersClass.extend = Backbone.Model.extend;
+    _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+    handlers = new HandlersClass();
+  });
+
   describe("when adding a handler", function(){
-    var HandlersClass, handlers, handler, setHandleredHandler, ctx;
+    var handler, setHandleredHandler, ctx;
 
     beforeEach(function(){
-      HandlersClass = function(){
-        this._wreqrHandlers = {};
-        this.type = 'Handler';
-        this.eventContainer = 'handlersEvents';
-        this.handlersEvents = _.extend({}, Backbone.Events);
-      };
-      HandlersClass.extend = Backbone.Model.extend;
-      _.extend( HandlersClass.prototype, Wreqr.Handlers );
 
-      handlers = new HandlersClass();
-      
       spyOn(handlers.handlersEvents, "trigger");
 
       ctx = {};
@@ -34,20 +46,10 @@ describe("handlers", function(){
   describe("when requesting a handler by name", function(){
 
     describe("and a handler has been setHandlered with that name", function(){
-      var HandlerClass, handler, setHandleredHandler, ctx;
+      var setHandleredHandler, ctx;
 
       beforeEach(function(){
-        HandlersClass = function(){
-        this._wreqrHandlers = {};
-        this.type = 'Handler';
-        this.eventContainer = 'handlersEvents';
-        this.handlersEvents = _.extend({}, Backbone.Events);
-      };
-      HandlersClass.extend = Backbone.Model.extend;
-      _.extend( HandlersClass.prototype, Wreqr.Handlers );
-
-      handlers = new HandlersClass();
-
+        
         ctx = {};
         setHandleredHandler = jasmine.createSpy("a setHandlered handler");
         handlers.setHandler("handler", setHandleredHandler, ctx);
@@ -67,20 +69,6 @@ describe("handlers", function(){
     });
 
     describe("and a handler has not been setHandlered with that name", function(){
-      var HandlersClass, handlers;
-
-      beforeEach(function(){
-        HandlersClass = function(){
-          this._wreqrHandlers = {};
-          this.type = 'Handler';
-          this.eventContainer = 'handlersEvents';
-          this.handlersEvents = _.extend({}, Backbone.Events);
-        };
-        HandlersClass.extend = Backbone.Model.extend;
-        _.extend( HandlersClass.prototype, Wreqr.Handlers );
-
-        handlers = new HandlersClass();
-      });
 
       it("should thrown an error saying a handler was not found", function(){
         function getHandler(){ handlers.getHandler("not registered");}
@@ -93,19 +81,9 @@ describe("handlers", function(){
   });
 
   describe("when removing a named handler", function(){
-    var HandlerClass, handlers, setHandleredHandler, ctx;
+    var setHandleredHandler, ctx;
 
     beforeEach(function(){
-      HandlersClass = function(){
-        this._wreqrHandlers = {};
-        this.type = 'Handler';
-        this.eventContainer = 'handlersEvents';
-        this.handlersEvents = _.extend({}, Backbone.Events);
-      };
-      HandlersClass.extend = Backbone.Model.extend;
-      _.extend( HandlersClass.prototype, Wreqr.Handlers );
-
-      handlers = new HandlersClass();
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
@@ -121,19 +99,9 @@ describe("handlers", function(){
   });
 
   describe("when removing all handlers", function(){
-    var HandlerClass, handlers, setHandleredHandler, ctx;
+    var setHandleredHandler, ctx;
 
     beforeEach(function(){
-      HandlersClass = function(){
-        this._wreqrHandlers = {};
-        this.type = 'Handler';
-        this.eventContainer = 'handlersEvents';
-        this.handlersEvents = _.extend({}, Backbone.Events);
-      };
-      HandlersClass.extend = Backbone.Model.extend;
-      _.extend( HandlersClass.prototype, Wreqr.Handlers );
-
-      handlers = new HandlersClass();
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");

@@ -8,12 +8,18 @@ Wreqr.Commands = (function(Wreqr){
 
   var Commands = function(options) {
       this.options = options || {};
-      this._wreqrHandlers = {};
+      this._commandsHandlers = {};
       this._initializeStorage(this.options);
 
-      this.type = 'Command';
       this.eventContainer = 'commandsEvents';
       this.commandsEvents = _.extend({}, Backbone.Events);
+
+      this.setCommands = _.bind(Wreqr.Handlers.setHandlers, this, 'Command');
+      this.setCommand  = _.bind(Wreqr.Handlers.setHandler, this, 'Command');
+      this.hasCommand  = _.bind(Wreqr.Handlers.hasHandler, this, 'Command');
+      this.getCommand  = _.bind(Wreqr.Handlers.getHandler, this, 'Command');
+      this.removeCommand  = _.bind(Wreqr.Handlers.removeHandler, this, 'Command');
+      this.removeAllCommands = _.bind(Wreqr.Handlers.removeAllHandlers, this, 'Command');
 
       this[this.eventContainer].on("handler:add", this._executeCommands, this);
   };
@@ -21,13 +27,6 @@ Wreqr.Commands = (function(Wreqr){
   Commands.extend = Backbone.Model.extend;
 
   return Commands.extend({
-
-    setCommands: Wreqr.Handlers.setHandlers,
-    setCommand : Wreqr.Handlers.setHandler,
-    hasCommand : Wreqr.Handlers.hasHandler,
-    getCommand : Wreqr.Handlers.getHandler,
-    removeCommand : Wreqr.Handlers.removeHandler,
-    removeAllCommands: Wreqr.Handlers.removeAllHandlers,
 
     storageType: Wreqr.CommandStorage,
 

@@ -1,24 +1,35 @@
 describe("handler - set from hash", function(){
 
+  var HandlersClass, handlers;
+
+  beforeEach(function(){
+    HandlersClass = function(){
+      this._handlersHandlers = {};
+      this.type = 'Handler';
+      this.eventContainer = 'handlersEvents';
+      this.handlersEvents = _.extend({}, Backbone.Events);
+
+      this.setHandlers = _.bind(Wreqr.Handlers.setHandlers, this, 'Handler');
+      this.setHandler  = _.bind(Wreqr.Handlers.setHandler, this, 'Handler');
+      this.hasHandler  = _.bind(Wreqr.Handlers.hasHandler, this, 'Handler');
+      this.getHandler  = _.bind(Wreqr.Handlers.getHandler, this, 'Handler');
+      this.removeHandler  = _.bind(Wreqr.Handlers.removeHandler, this, 'Handler');
+      this.removeAllHandlers = _.bind(Wreqr.Handlers.removeAllHandlers, this, 'Handler');
+    };
+    HandlersClass.extend = Backbone.Model.extend;
+    _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+    handlers = new HandlersClass();
+  });
+
   describe("when adding multiple handlers via an object literal / hash", function(){
-    var HandlersClass, handlers, hndlrs;
+    var hndlrs;
 
     beforeEach(function(){
       hndlrs = {
         "foo": jasmine.createSpy("foo handler"),
         "bar": jasmine.createSpy("bar handler")
       };
-
-      HandlersClass = function(){
-        this._wreqrHandlers = {};
-        this.type = 'Handler';
-        this.eventContainer = 'handlersEvents';
-        this.handlersEvents = _.extend({}, Backbone.Events);
-      };
-      HandlersClass.extend = Backbone.Model.extend;
-      _.extend( HandlersClass.prototype, Wreqr.Handlers );
-
-      handlers = new HandlersClass();
 
       handlers.setHandlers(hndlrs);
     });
@@ -38,7 +49,7 @@ describe("handler - set from hash", function(){
   });
 
   describe("when the object literal values are objects with a callback and context attribute", function(){
-    var HandlersClass, handlers, hndlrs, ctx;
+    var hndlrs, ctx;
 
     beforeEach(function(){
       ctx = {};
@@ -49,17 +60,6 @@ describe("handler - set from hash", function(){
           context: ctx
         }
       };
-
-      HandlersClass = function(){
-        this._wreqrHandlers = {};
-        this.type = 'Handler';
-        this.eventContainer = 'handlersEvents';
-        this.handlersEvents = _.extend({}, Backbone.Events);
-      };
-      HandlersClass.extend = Backbone.Model.extend;
-      _.extend( HandlersClass.prototype, Wreqr.Handlers );
-
-      handlers = new HandlersClass();
       handlers.setHandlers(hndlrs);
 
       handlers.getHandler("foo")();

@@ -8,22 +8,22 @@ Wreqr.RequestResponse = (function(Wreqr){
 
   var RequestResponse = function(options) {
     this.options = options;
-    this._wreqrHandlers = {};
+    this._requestsHandlers = {};
     this.eventContainer = 'reqresEvents';
     this.reqresEvents = _.extend({}, Backbone.Events);
-    this.type = 'Request';
+
+    this.setRequests= _.bind(Wreqr.Handlers.setHandlers, this, 'Request');
+    this.setRequest = _.bind(Wreqr.Handlers.setHandler, this, 'Request');
+    this.hasRequest = _.bind(Wreqr.Handlers.hasHandler, this, 'Request');
+    this.getRequest = _.bind(Wreqr.Handlers.getHandler, this, 'Request');
+    this.removeRequest = _.bind(Wreqr.Handlers.removeHandler, this, 'Request');
+    this.removeAllRequests= _.bind(Wreqr.Handlers.removeAllHandlers, this, 'Request');
+
   };
 
   RequestResponse.extend = Backbone.Model.extend;
 
   return RequestResponse.extend({
-
-    setRequests: Wreqr.Handlers.setHandlers,
-    setRequest : Wreqr.Handlers.setHandler,
-    hasRequest : Wreqr.Handlers.hasHandler,
-    getRequest : Wreqr.Handlers.getHandler,
-    removeRequest : Wreqr.Handlers.removeHandler,
-    removeAllRequests: Wreqr.Handlers.removeAllHandlers,
 
     request: function(){
       var name = arguments[0];
