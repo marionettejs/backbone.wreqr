@@ -77,7 +77,28 @@ Wreqr.Handlers = (function(Backbone, _){
       type = type || 'Handler';
       var handlerContainer = '_'+type.toLowerCase()+'sHandlers';
       this[handlerContainer] = {};
-    }
+    },
+
+    // Alias these handler methods and attach them to object
+    _extendHandlerMethods: function(object, alias) {
+
+      var Alias = alias.charAt(0).toUpperCase() + alias.slice(1);
+
+      this[ 'set'+Alias+'s' ] = _.bind(Wreqr.Handlers.setHandlers, this, Alias);
+      this[ 'set'+Alias ]  = _.bind(Wreqr.Handlers.setHandler, this, 'Command');
+
+      this.eventContainer = 'commandsEvents';
+
+
+      this.commandsEvents = _.extend({}, Backbone.Events);
+
+      this.setCommand  = _.bind(Wreqr.Handlers.setHandler, this, 'Command');
+      this.hasCommand  = _.bind(Wreqr.Handlers.hasHandler, this, 'Command');
+      this.getCommand  = _.bind(Wreqr.Handlers.getHandler, this, 'Command');
+      this.removeCommand  = _.bind(Wreqr.Handlers.removeHandler, this, 'Command');
+      this.removeAllCommands = _.bind(Wreqr.Handlers.removeAllHandlers, this, 'Command');
+
+    }   
 
   };
 
