@@ -1,11 +1,33 @@
 describe("handlers", function(){
 
+  var HandlersClass, handlers;
+
+  beforeEach(function(){
+    HandlersClass = function(){
+      this._handlersHandlers = {};
+      this.type = 'Handler';
+      this.eventContainer = 'handlersEvents';
+      this.handlersEvents = _.extend({}, Backbone.Events);
+
+      this.setHandlers = _.bind(Wreqr.Handlers.setHandlers, this, 'Handler');
+      this.setHandler  = _.bind(Wreqr.Handlers.setHandler, this, 'Handler');
+      this.hasHandler  = _.bind(Wreqr.Handlers.hasHandler, this, 'Handler');
+      this.getHandler  = _.bind(Wreqr.Handlers.getHandler, this, 'Handler');
+      this.removeHandler  = _.bind(Wreqr.Handlers.removeHandler, this, 'Handler');
+      this.removeAllHandlers = _.bind(Wreqr.Handlers.removeAllHandlers, this, 'Handler');
+    };
+    HandlersClass.extend = Backbone.Model.extend;
+    _.extend( HandlersClass.prototype, Wreqr.Handlers );
+
+    handlers = new HandlersClass();
+  });
+
   describe("when adding a handler", function(){
-    var handlers, handler, setHandleredHandler, ctx;
+    var handler, setHandleredHandler, ctx;
 
     beforeEach(function(){
-      handlers = new Wreqr.Handlers();
-      spyOn(handlers, "trigger");
+
+      spyOn(handlers.handlersEvents, "trigger");
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
@@ -17,18 +39,17 @@ describe("handlers", function(){
     });
 
     it("should trigger a handler:add event", function(){
-      expect(handlers.trigger).toHaveBeenCalledWith("handler:add", "foo", setHandleredHandler, ctx);
+      expect(handlers.handlersEvents.trigger).toHaveBeenCalledWith("handler:add", "foo", setHandleredHandler, ctx);
     });
   });
 
   describe("when requesting a handler by name", function(){
 
     describe("and a handler has been setHandlered with that name", function(){
-      var handler, setHandleredHandler, ctx;
+      var setHandleredHandler, ctx;
 
       beforeEach(function(){
-        var handlers = new Wreqr.Handlers();
-
+        
         ctx = {};
         setHandleredHandler = jasmine.createSpy("a setHandlered handler");
         handlers.setHandler("handler", setHandleredHandler, ctx);
@@ -48,11 +69,6 @@ describe("handlers", function(){
     });
 
     describe("and a handler has not been setHandlered with that name", function(){
-      var handlers;
-
-      beforeEach(function(){
-        handlers = new Wreqr.Handlers();
-      });
 
       it("should thrown an error saying a handler was not found", function(){
         function getHandler(){ handlers.getHandler("not registered");}
@@ -65,10 +81,9 @@ describe("handlers", function(){
   });
 
   describe("when removing a named handler", function(){
-    var handlers, setHandleredHandler, ctx;
+    var setHandleredHandler, ctx;
 
     beforeEach(function(){
-      handlers = new Wreqr.Handlers();
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
@@ -84,10 +99,9 @@ describe("handlers", function(){
   });
 
   describe("when removing all handlers", function(){
-    var handlers, setHandleredHandler, ctx;
+    var setHandleredHandler, ctx;
 
     beforeEach(function(){
-      handlers = new Wreqr.Handlers();
 
       ctx = {};
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
