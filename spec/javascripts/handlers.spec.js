@@ -48,16 +48,15 @@ describe("handlers", function(){
     });
 
     describe("and a handler has not been setHandlered with that name", function(){
-      var handlers;
+      var handlers, handle;
 
       beforeEach(function(){
         handlers = new Wreqr.Handlers();
+        handle = handlers.getHandler();
       });
 
       it("should thrown an error saying a handler was not found", function(){
-        function getHandler(){ handlers.getHandler("not registered");}
-
-        expect(getHandler).toThrow("Handler not found for 'not registered'");
+        expect(handle).toBeUndefined;
       });
 
     });
@@ -65,7 +64,7 @@ describe("handlers", function(){
   });
 
   describe("when removing a named handler", function(){
-    var handlers, setHandleredHandler, ctx;
+    var handlers, setHandleredHandler, ctx, handle;
 
     beforeEach(function(){
       handlers = new Wreqr.Handlers();
@@ -74,17 +73,16 @@ describe("handlers", function(){
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
       handlers.setHandler("handler", setHandleredHandler, ctx);
       handlers.removeHandler("handler");
+      handle = handlers.getHandler("handler");
     });
 
     it("should no longer return the requested hander", function(){
-      function getHandler(){ handlers.getHandler("handler");}
-
-      expect(getHandler).toThrow("Handler not found for 'handler'");
+      expect(handle).toBeUndefined;
     });
   });
 
   describe("when removing all handlers", function(){
-    var handlers, setHandleredHandler, ctx;
+    var handlers, setHandleredHandler, ctx, handle1, handle2;
 
     beforeEach(function(){
       handlers = new Wreqr.Handlers();
@@ -93,14 +91,14 @@ describe("handlers", function(){
       setHandleredHandler = jasmine.createSpy("a setHandlered handler");
       handlers.setHandler("handler1", setHandleredHandler, ctx);
       handlers.setHandler("handler2", setHandleredHandler, ctx);
-
       handlers.removeAllHandlers();
+      handle1 = handlers.getHandler("handler1");
+      handle2 = handlers.getHandler("handler2");
     });
 
     it("should no longer return the requested handler", function(){
-      function getHandler(){ handlers.getHandler("handler");}
-
-      expect(getHandler).toThrow("Handler not found for 'handler'");
+      expect(handle1).toBeUndefined;
+      expect(handle2).toBeUndefined;
     });
   });
 
