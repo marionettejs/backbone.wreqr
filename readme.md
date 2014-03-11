@@ -1,33 +1,30 @@
 # Backbone.Wreqr
 
-A simple infrastructure based on [messaging patterns](http://www.eaipatterns.com/)
-and service bus implementations for decoupling [Backbone](http://backbonejs.org)
-and [Backbone.Marionette](http://marionettejs.com) applications.
+Backbone.Wreqr is a library to help you write decoupled applications.
 
-## Downloads And Source
+## Introduction
 
-Grab the source from the `src` folder above. Grab the most recent builds
-from the links below.
+Backbone comes with a simple pub/sub system called Events. Backbone.Wreqr is a library that expands upon this with
+two other systems: a request response system and a commands system.
 
-### Standard Builds
+The Event Aggregator is used to share events between your applications. Request response is used to provide a loosely-coupled
+means for pieces of your application to share information between one another. And finally, commands is a way for pieces
+of your application to tell other pieces to perform actions.
 
-* Development: [backbone.wreqr.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/backbone.wreqr.js)
+On the surface these patterns will appear similar. This is no surprise; they are each merely a semantic cover on top of the
+Backbone.Events object. But this semantic difference can provide added clarity to your code, and robustness to your application
+when used appropriately.
 
-* Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/backbone.wreqr.min.js)
+## Getting Started
 
-### RequireJS (AMD) Builds
+Get the source by direct download, by cloning this repository, or through Bower.
 
-* Development: [backbone.wreqr.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.js)
+`bower install backbone.wreqr`
 
-* Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.min.js)
+## Event Aggregator
 
-## Basic Use
-
-### Event Aggregator
-
-An event aggregator implementation. It extends from `Backbone.Events` to
-provide the core event handling code in an object that can itself be
-extended and instantiated as needed.
+The Event Aggregator is a class for the Backbone.Events object that you may already be
+familiar with. Use it as you would any other object that extends from Backbone.Events.
 
 ```js
 var vent = new Backbone.Wreqr.EventAggregator();
@@ -39,27 +36,15 @@ vent.on("foo", function(){
 vent.trigger("foo");
 ```
 
-### Commands And Request / Response
+The Event Aggregator is best used to communicate events between your apps.
 
-Wreqr can be used by instantiating a `Backbone.Wreqr.Commands`
-or `Backbone.Wreqr.RequestResponse` object. These objects provide a
-`setHandler` method to add a handler for a named request or command.
-Commands can then be executed with the `execute` method, and
-request/response can be done through the `request` method.
+## Request Response
 
-### Commands
-
-```js
-var commands = new Backbone.Wreqr.Commands();
-
-commands.setHandler("foo", function(){
-  console.log("the foo command was executed");
-});
-
-commands.execute("foo");
-```
-
-### Request/Response
+Request response is used to share information between pieces of your application. It works
+in an opposite manner to the event aggregator. Whereas the event aggregator typically sends
+information from the object that emits the event to the listeners, data in request response is
+sent from the listener to the emitter, or requester. This allows you to send information upon
+request.
 
 ```js
 var reqres = new Backbone.Wreqr.RequestResponse();
@@ -70,6 +55,22 @@ reqres.setHandler("foo", function(){
 
 var result = reqres.request("foo");
 console.log(result);
+```
+
+## Commands
+
+The final piece of Wreqr is commands. Unlike the event aggregator and request/response, which
+each transfer data, commands is not meant to communicate data in any direction. Instead, it is merely
+meant to request that work be done in a decoupled manner.
+
+```js
+var commands = new Backbone.Wreqr.Commands();
+
+commands.setHandler("foo", function(){
+  console.log("the foo command was executed");
+});
+
+commands.execute("foo");
 ```
 
 ### Adding Multiple Handlers
