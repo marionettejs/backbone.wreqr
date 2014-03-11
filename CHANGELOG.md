@@ -1,5 +1,8 @@
 # Change log
 
+### v1.0.1
+  * update dependencies
+
 ### v1.0.0
   * major version release
   * minor fixes
