@@ -1,4 +1,6 @@
 # Change log
+### v1.1.0
+ * Removes the Error on unhandled commands/requests
 
 ### v1.0.1
   * update dependencies
