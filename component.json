@@ -1,7 +1,7 @@
 {
   "name": "backbone.wreqr",
   "description": "A Simple Service Bus For Backbone and Backbone.Marionette",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repo": "marionettejs/backbone.wreqr",
   "keywords": [
     "backbone",
@@ -30,6 +30,6 @@
   },
   "main": "lib/amd/backbone.wreqr.js",
   "scripts": [
-    "lib/amd/backbone.wreqr.js" 
+    "lib/amd/backbone.wreqr.js"
   ]
 }
