@@ -15,11 +15,11 @@ module.exports = function(grunt) {
         '// Distributed under MIT license\n' +
         '//\n' + 
         '// http://github.com/marionettejs/backbone.wreqr\n' +
-        '\n\n'
+        '\n'
     },
 
     lint: {
-      files: ['src/wreqr*.js']
+      files: ['src/*.js']
     },
 
     preprocess: {
@@ -39,9 +39,13 @@ module.exports = function(grunt) {
       options: {
         banner: "<%= meta.banner %>"
       },
-      build: {
+      core: {
         src: 'lib/backbone.wreqr.js',
         dest: 'lib/backbone.wreqr.js'
+      },
+      amd: {
+        src: 'lib/amd/backbone.wreqr.js',
+        dest: 'lib/amd/backbone.wreqr.js'
       }
     },
 
@@ -69,8 +73,8 @@ module.exports = function(grunt) {
         helpers : 'spec/javascripts/helpers/*.js',
         specs : 'spec/javascripts/**/*.spec.js',
         vendor : [
-          'public/javascripts/json2.js',
           'public/javascripts/jquery.js',
+          'public/javascripts/json2.js',
           'public/javascripts/underscore.js',
           'public/javascripts/backbone.js'
         ],
@@ -90,7 +94,7 @@ module.exports = function(grunt) {
           'src/wreqr.js',
           'spec/javascripts/support/wreqrHelper.js',
           'src/wreqr.handlers.js',
-          'src/wreqr.*.js'
+          'src/*.js'
         ],
       }
     },
