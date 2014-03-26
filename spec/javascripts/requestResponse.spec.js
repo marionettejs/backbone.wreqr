@@ -1,20 +1,35 @@
 describe("request/response", function(){
-
   describe("when requesting a response", function(){
     var reqres, result;
 
-    beforeEach(function(){
-      reqres = new Wreqr.RequestResponse();
+    describe("with a function as a handler", function() {
+      beforeEach(function(){
+        reqres = new Wreqr.RequestResponse();
 
-      reqres.setHandler("do:it", function(){
-        return "some value";
+        reqres.setHandler("do:it", function(){
+          return "some value";
+        });
+
+        result = reqres.request("do:it");
       });
 
-      result = reqres.request("do:it");
+      it("should return a value", function(){
+        expect(result).toBe("some value");
+      });
     });
 
-    it("should return a value", function(){
-      expect(result).toBe("some value");
+    describe("with a value as a handler", function() {
+      beforeEach(function(){
+        reqres = new Wreqr.RequestResponse();
+
+        reqres.setHandler("do:it", "someValue");
+
+        result = reqres.request("do:it");
+      });
+
+      it("should return the value", function(){
+        expect(result).toBe("someValue");
+      });
     });
   });
 

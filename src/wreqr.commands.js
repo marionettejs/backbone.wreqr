@@ -26,7 +26,7 @@ Wreqr.Commands = (function(Wreqr){
       args = Array.prototype.slice.call(arguments, 1);
 
       if (this.hasHandler(name)){
-        this.getHandler(name).apply(this, args);
+        this._triggerHandler.apply(this, arguments);
       } else {
         this.storage.addCommand(name, args);
       }
@@ -39,7 +39,9 @@ Wreqr.Commands = (function(Wreqr){
 
       // loop through and execute all the stored command instances
       _.each(command.instances, function(args){
-        handler.apply(context, args);
+        if (_.isFunction(handler)) {
+          handler.apply(context, args);
+        }
       });
 
       this.storage.clearCommands(name);

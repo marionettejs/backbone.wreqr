@@ -7,11 +7,9 @@ Wreqr.RequestResponse = (function(Wreqr){
   "use strict";
 
   return Wreqr.Handlers.extend({
-    request: function(){
-      var name = arguments[0];
-      var args = Array.prototype.slice.call(arguments, 1);
+    request: function(name){
       if (this.hasHandler(name)) {
-        return this.getHandler(name).apply(this, args);
+        return this._triggerHandler.apply(this, arguments);
       }
     }
   });

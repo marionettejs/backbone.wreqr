@@ -35,7 +35,7 @@ describe("handler - set from hash", function(){
       
       hndlrs = {
         "foo": {
-          callback: jasmine.createSpy("foo handler"),
+          handler: jasmine.createSpy("foo handler"),
           context: ctx
         }
       };
@@ -47,8 +47,8 @@ describe("handler - set from hash", function(){
     });
 
     it("should execute the handler callback with the specified context", function(){
-      expect(hndlrs.foo.callback).toHaveBeenCalled();
-      expect(hndlrs.foo.callback.mostRecentCall.object).toBe(ctx);
+      expect(hndlrs.foo.handler).toHaveBeenCalled();
+      expect(hndlrs.foo.handler.mostRecentCall.object).toBe(ctx);
     });
   });
 
