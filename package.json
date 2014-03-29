@@ -7,11 +7,13 @@
   "keywords": [
     "backbone",
     "plugin",
-    "computed",
-    "field",
-    "model",
     "client",
-    "browser"
+    "browser",
+    "message",
+    "messages",
+    "messaging",
+    "decoupled",
+    "architecture"
   ],
 
   "licenses": [
