@@ -71,9 +71,12 @@ module.exports = function(grunt) {
         vendor : [
           'public/javascripts/json2.js',
           'public/javascripts/jquery.js',
-          'public/javascripts/underscore.js',
-          'public/javascripts/backbone.js'
+          'node_modules/underscore/underscore.js',
+          'node_modules/backbone/backbone.js',
+          'node_modules/sinon/pkg/sinon.js',
+          'node_modules/jasmine-sinon/lib/jasmine-sinon.js',
         ],
+        keepRunner: true,
       },
       coverage : {
         src : '<%= jasmine.wreqr.src %>',
