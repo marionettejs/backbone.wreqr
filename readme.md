@@ -72,6 +72,42 @@ var result = reqres.request("foo");
 console.log(result);
 ```
 
+### Radio
+
+Radio is a convenient way for emitting events through channels. Radio can be used to either retrieve a channel, or talk through a channel with either command, reqres, or vent.
+
+```js
+// channels
+var globalChannel = Backbone.Wreqr.radio.channel('global');
+var userChannel = Backbone.Wreqr.radio.channel('user');
+
+// Wreqr events
+Backbone.Wreqr.radio.commands.execute( 'global', 'shutdown' );
+Backbone.Wreqr.radio.reqres.request(  'global', 'current-user' );
+Backbone.Wreqr.radio.vent.trigger(  'global', 'game-over');
+
+```
+
+### Channel
+Channel is an object that wraps EventAggregator, Commands, and Reqres. Channels provide a convenient way for the objects in your system to talk to one another without the global channel becoming too noisy.
+
+```js
+// global channel
+var globalChannel = Backbone.Wreqr.radio.channel('global');
+globalChannel.commands.execute('shutdown' );
+globalChannel.reqres.request('current-user' );
+globalChannel.vent.trigger('game-over');
+
+// user channel
+var userChannel = Backbone.Wreqr.radio.channel('user');
+userChannel.commands.execute('punnish');
+userChannel.reqres.request('user-avatar');
+userChannel.vent.trigger('win', {
+  level: 2,
+  stars: 3
+});
+```
+
 ### Adding Multiple Handlers
 
 Multiple handlers can be set on the Commands and RequestResponse

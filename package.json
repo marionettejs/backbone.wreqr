@@ -59,7 +59,9 @@
     "grunt-contrib-connect": "0.2.0",
     "grunt-template-jasmine-istanbul": "0.2.0",
     "grunt-preprocess": "2.0.0",
-    "grunt-plato": "0.1.5"
+    "grunt-plato": "0.1.5",
+    "sinon": "1.9.0",
+    "jasmine-sinon": "0.3.1"
   },
   "jam":{
     "dependencies": {
