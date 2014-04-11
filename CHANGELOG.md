@@ -1,6 +1,10 @@
 # Change log
+### v1.2.0
+  * Adds Radio, allowing you to create explicit namespaces called Channels. A Channel is made up of
+   an instance of each of the three messaging systems.
+
 ### v1.1.0
- * Removes the Error on unhandled commands/requests
+  * Removes the Error on unhandled commands/requests
 
 ### v1.0.1
   * update dependencies
