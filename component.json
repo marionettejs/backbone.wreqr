@@ -28,8 +28,8 @@
     "jashkenas/backbone": "*",
     "jashkenas/underscore": "*"
   },
-  "main": "lib/amd/backbone.wreqr.js",
+  "main": "lib/backbone.wreqr.js",
   "scripts": [
-    "lib/amd/backbone.wreqr.js"
+    "lib/backbone.wreqr.js"
   ]
 }

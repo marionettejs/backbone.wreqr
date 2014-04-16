@@ -20,6 +20,7 @@
     "Wreqr": true,
     "require": true,
     "module": true,
-    "define": true
+    "define": true,
+    "exports": true
   }
 }

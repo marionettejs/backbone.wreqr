@@ -1,6 +1,21 @@
-Backbone.Wreqr = (function(Backbone, Marionette, _){
+(function(root, factory) {
+
+  if (typeof define === 'function' && define.amd) {
+    define(['exports', 'backbone', 'underscore'], function(exports, Backbone, _) {
+      factory(exports, Backbone, _);
+    });
+  } else if (typeof exports !== 'undefined') {
+    var Backbone = require('backbone');
+    var _ = require('underscore');
+    factory(exports, Backbone, _);
+  } else {
+    factory({}, root.Backbone, root._);
+  }
+
+}(this, function(Wreqr, Backbone, _) {
   "use strict";
-  var Wreqr = {};
+
+  Backbone.Wreqr = Wreqr;
 
   // @include wreqr.handlers.js
   // @include wreqr.commandStorage.js
@@ -10,5 +25,4 @@ Backbone.Wreqr = (function(Backbone, Marionette, _){
   // @include wreqr.channel.js
   // @include wreqr.radio.js
 
-  return Wreqr;
-})(Backbone, Backbone.Marionette, _);
+}));
