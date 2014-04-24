@@ -77,7 +77,7 @@ Wreqr.radio = (function(Wreqr){
       var messageSystem = radio._getChannel(channelName)[system];
       var args = Array.prototype.slice.call(arguments, 1);
 
-      messageSystem[method].apply(messageSystem, args);
+      return messageSystem[method].apply(messageSystem, args);
     };
   };
 
