@@ -6,14 +6,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     meta: {
       version: '<%= pkg.version %>',
-      banner: 
+      banner:
         '// Backbone.Wreqr (Backbone.Marionette)\n' +
-        '// ----------------------------------\n' + 
+        '// ----------------------------------\n' +
         '// v<%= pkg.version %>\n' +
-        '//\n' + 
+        '//\n' +
         '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
         '// Distributed under MIT license\n' +
-        '//\n' + 
+        '//\n' +
         '// http://github.com/marionettejs/backbone.wreqr\n' +
         '\n\n'
     },
@@ -27,12 +27,7 @@ module.exports = function(grunt) {
         files: {
           'lib/backbone.wreqr.js' : 'src/wreqr.js'
         }
-      },
-      core_amd: {
-        files: {
-          'lib/amd/backbone.wreqr.js' : 'src/amd.js'
-        }
-      },
+      }
     },
 
     concat: {
@@ -48,10 +43,6 @@ module.exports = function(grunt) {
     uglify : {
       options: {
         banner: "<%= meta.banner %>"
-      },
-      amd : {
-        src : 'lib/amd/backbone.wreqr.js',
-        dest : 'lib/amd/backbone.wreqr.min.js'
       },
       core : {
         src : 'lib/backbone.wreqr.js',
