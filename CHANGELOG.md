@@ -1,4 +1,8 @@
 # Change log
+
+### v1.2.1
+  * Remove AMD builds and add a single UMD style build.
+
 ### v1.2.0
   * Adds Radio, allowing you to create explicit namespaces called Channels. A Channel is made up of
    an instance of each of the three messaging systems.
