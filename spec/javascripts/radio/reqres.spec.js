@@ -157,4 +157,28 @@ describe('radio.reqres', function() {
     });
 
   });
+
+  describe('passing data between the handler and the request', function() {
+
+    var ch, chName, fn, returnObject;
+
+    beforeEach(function() {
+
+      chName = 'test';
+      reqName = 'some:request';
+      fn = function(p1, p2, p3){
+        return p1 + p2 +p3;
+      };
+      Wreqr.radio.reqres.setHandler( chName, reqName, fn );
+
+      returnObject = Wreqr.radio.reqres.request( chName, reqName , 1, 2, 3);
+
+    });
+
+    it( 'should pass parameters to handler from request', function() {
+      expect( returnObject ).toEqual(6);
+    });
+
+  });
+
 })
