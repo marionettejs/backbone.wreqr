@@ -15,7 +15,16 @@
 }(this, function(Wreqr, Backbone, _) {
   "use strict";
 
+  var previousWreqr = Backbone.Wreqr;
+
   Backbone.Wreqr = Wreqr;
+
+  Backbone.Wreqr.VERSION = '<%= version %>';
+
+  Backbone.Wreqr.noConflict = function () {
+    Backbone.Wreqr = previousWreqr;
+    return this;
+  };
 
   // @include wreqr.handlers.js
   // @include wreqr.commandStorage.js
