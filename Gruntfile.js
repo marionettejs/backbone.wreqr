@@ -24,9 +24,20 @@ module.exports = function(grunt) {
 
     preprocess: {
       core_build: {
-        files: {
-          'lib/backbone.wreqr.js' : 'src/wreqr.js'
+        src: 'src/wreqr.js',
+        dest: 'lib/backbone.wreqr.js'
+      }
+    },
+
+    template: {
+      options: {
+        data: {
+          version: '<%= meta.version %>'
         }
+      },
+      core: {
+        src: '<%= preprocess.core_build.dest %>',
+        dest: '<%= preprocess.core_build.dest %>'
       }
     },
 
@@ -125,6 +136,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-preprocess');
+  grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -140,6 +152,6 @@ module.exports = function(grunt) {
   grunt.registerTask('server', ['jasmine:wreqr:build', 'connect:server', 'watch:server']);
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'jasmine:coverage', 'preprocess', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'jasmine:coverage', 'preprocess', 'template', 'concat', 'uglify']);
 
 };
