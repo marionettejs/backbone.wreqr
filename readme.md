@@ -15,12 +15,6 @@ from the links below.
 
 * Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/backbone.wreqr.min.js)
 
-### RequireJS (AMD) Builds
-
-* Development: [backbone.wreqr.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.js)
-
-* Production: [backbone.wreqr.min.js](https://raw.github.com/marionettejs/backbone.wreqr/master/lib/amd/backbone.wreqr.min.js)
-
 ## Basic Use
 
 ### Event Aggregator
