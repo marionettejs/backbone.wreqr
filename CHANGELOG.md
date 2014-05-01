@@ -1,5 +1,9 @@
 # Change log
 
+### v1.3.0
+  * Add Wreqr.noConflict()
+  * Add Wreqr.VERSION
+
 ### v1.2.1
   * Remove AMD builds and add a single UMD style build.
 
