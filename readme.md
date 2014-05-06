@@ -1,4 +1,9 @@
-# Backbone.Wreqr
+<h1 align="center">Backbone.Wreqr</h1>
+<p align="center">
+  <a title='Build Status' href="https://travis-ci.org/marionettejs/backbone.wreqr">
+    <img src='https://travis-ci.org/marionettejs/backbone.wreqr.svg' />
+  </a>
+</p>
 
 A simple infrastructure based on [messaging patterns](http://www.eaipatterns.com/)
 and service bus implementations for decoupling [Backbone](http://backbonejs.org)
