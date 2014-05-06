@@ -50,9 +50,7 @@
     "grunt-contrib-jshint": "0.2.0",
     "grunt-contrib-watch": "0.3.1",
     "grunt-contrib-connect": "0.2.0",
-    "grunt-template-jasmine-istanbul": "0.2.0",
     "grunt-preprocess": "4.0.0",
-    "grunt-plato": "0.1.5",
     "sinon": "1.9.0",
     "jasmine-sinon": "0.3.1",
     "grunt-template": "^0.2.3"
