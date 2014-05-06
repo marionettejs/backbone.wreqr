@@ -80,16 +80,6 @@ module.exports = function(grunt) {
         ],
         keepRunner: true,
       },
-      coverage : {
-        src : '<%= jasmine.wreqr.src %>',
-        options : {
-          template : require('grunt-template-jasmine-istanbul'),
-          templateOptions: {
-            coverage: 'reports/coverage.json',
-            report: 'reports/coverage'
-          }
-        }
-      },
       wreqr: {
         src : [
           'src/build/backbone.wreqr.js',
@@ -106,15 +96,7 @@ module.exports = function(grunt) {
       },
       wreqr : [ 'src/*.js' ]
     },
-    plato: {
-      wreqr : {
-        src : 'src/*.js',
-        dest : 'reports',
-        options : {
-          jshint : grunt.file.readJSON('.jshintrc')
-        }
-      }
-    },
+
     watch: {
       wreqr : {
         files : ['src/*.js', 'spec/**/*.js'],
@@ -143,7 +125,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-plato');
 
   grunt.registerTask('test', ['jshint', 'jasmine:wreqr']);
 
@@ -152,6 +133,6 @@ module.exports = function(grunt) {
   grunt.registerTask('server', ['jasmine:wreqr:build', 'connect:server', 'watch:server']);
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'jasmine:coverage', 'preprocess', 'template', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'jasmine:wreqr', 'preprocess', 'template', 'concat', 'uglify']);
 
 };
