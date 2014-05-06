@@ -1,5 +1,8 @@
 # Change log
 
+### v1.3.1
+  * Fix UMD setup and build process
+
 ### v1.3.0
   * Add Wreqr.noConflict()
   * Add Wreqr.VERSION
