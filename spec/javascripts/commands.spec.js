@@ -1,20 +1,35 @@
 describe("commands", function(){
-
   describe("when executing a command", function(){
     var commands, result;
 
-    beforeEach(function(){
-      commands = new Wreqr.Commands();
+    describe("and the handler is a function", function() {
+      beforeEach(function(){
+        commands = new Wreqr.Commands();
 
-      commands.setHandler("do:it", function(){
-        return "some value";
+        commands.setHandler("do:it", function(){
+          return "some value";
+        });
+
+        result = commands.execute("do:it");
       });
 
-      result = commands.execute("do:it");
+      it("should not return any value", function(){
+        expect(result).toBeUndefined();
+      });
     });
 
-    it("should not return any value", function(){
-      expect(result).toBeUndefined();
+    describe("and the handler is not a function", function() {
+      beforeEach(function(){
+        commands = new Wreqr.Commands();
+
+        commands.setHandler("do:it", "someValue");
+
+        result = commands.execute("do:it");
+      });
+
+      it("should not return a value", function(){
+        expect(result).toBeUndefined();
+      });
     });
   });
 

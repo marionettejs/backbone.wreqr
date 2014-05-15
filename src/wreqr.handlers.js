@@ -31,7 +31,7 @@ Wreqr.Handlers = (function(Backbone, _){
 
         if (_.isObject(handler) && !_.isFunction(handler)){
           context = handler.context;
-          handler = handler.callback;
+          handler = handler.handler;
         }
 
         this.setHandler(name, handler, context);
@@ -42,7 +42,7 @@ Wreqr.Handlers = (function(Backbone, _){
     // optional context to run the handler within
     setHandler: function(name, handler, context){
       var config = {
-        callback: handler,
+        handler: handler,
         context: context
       };
 
@@ -66,10 +66,15 @@ Wreqr.Handlers = (function(Backbone, _){
         return;
       }
 
-      return function(){
-        var args = Array.prototype.slice.apply(arguments);
-        return config.callback.apply(config.context, args);
-      };
+      if (_.isFunction(config.handler)) {
+        return function(){
+          var args = Array.prototype.slice.apply(arguments);
+          return config.handler.apply(config.context, args);
+        };
+      } else {
+        return config.handler;
+      }
+      
     },
 
     // Remove a handler for the specified name
@@ -80,7 +85,20 @@ Wreqr.Handlers = (function(Backbone, _){
     // Remove all handlers from this registry
     removeAllHandlers: function(){
       this._wreqrHandlers = {};
+    },
+
+    // If the handler is a function, execute it with the args
+    // Otherwise, just return it
+    _triggerHandler: function(name) {
+      var args = Array.prototype.slice.call(arguments, 1);
+      var handler = this.getHandler(name);
+      if (_.isFunction(handler)) {
+        return handler.apply(this, args);
+      } else {
+        return handler;
+      }
     }
+
   });
 
   return Handlers;
