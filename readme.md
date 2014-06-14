@@ -10,7 +10,7 @@ A simple infrastructure based on [messaging patterns](http://www.eaipatterns.com
 and service bus implementations for decoupling [Backbone](http://backbonejs.org)
 and [Backbone.Marionette](http://marionettejs.com) applications.
 
-The Wreqr library is effectively deprecated and won't be updated with new features anymore, only bug fixes.  There are a number of issues/inconsistencies/holes with the API and codebase, so it's being reintroduced as [Backbone.Radio](https://github.com/jmeas/backbone.radio). The two libraries provide much of the same functionality, but Radio brings Requests and Commands more in line with Backbone.Events.
+**Note:** The Wreqr library is effectively deprecated and won't be updated with new features anymore, only bug fixes.  There are a number of issues/inconsistencies/holes with the API and codebase, so it's being reintroduced as [Backbone.Radio](https://github.com/jmeas/backbone.radio). The two libraries provide much of the same functionality, but Radio brings Requests and Commands more in line with Backbone.Events.
 
 ## Downloads And Source
 
