@@ -9,7 +9,14 @@ A simple infrastructure based on [messaging patterns](http://www.eaipatterns.com
 and service bus implementations for decoupling [Backbone](http://backbonejs.org)
 and [Backbone.Marionette](http://marionettejs.com) applications.
 
-**Note:** The Wreqr library is effectively deprecated and won't be updated with new features anymore, only bug fixes.  There are a number of issues/inconsistencies/holes with the API and codebase, so it's being reintroduced as [Backbone.Radio](https://github.com/jmeas/backbone.radio). The two libraries provide much of the same functionality, but Radio brings Requests and Commands more in line with Backbone.Events.
+**Notice:** In the next major release of Marionette, v3, Wreqr will be swapped for an updated library,
+[Radio](https://github.com/jmeas/backbone.radio). If you've already begun using Wreqr, don't worry. This change
+isn't for quite some time: a few months, at the earliest. Also, we will support easily swapping the two libraries, 
+so you won't run into any problems if you decide to continue using Wreqr.
+
+For an introduction to Radio, check out
+[our blog post](http://marionettejs.github.io/2014/07/11/introducing-backbone-radio/index.html). As of Marionette v2.1, you can easily
+swap in Radio for Wreqr with [this shim](https://gist.github.com/jmeas/7992474cdb1c5672d88b). We think you'll really like the changes!
 
 ## Downloads And Source
 
