@@ -67,8 +67,7 @@ Wreqr.Handlers = (function(Backbone, _){
       }
 
       return function(){
-        var args = Array.prototype.slice.apply(arguments);
-        return config.callback.apply(config.context, args);
+        return config.callback.apply(config.context, arguments);
       };
     },
 
