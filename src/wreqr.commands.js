@@ -3,7 +3,7 @@
 //
 // A simple command pattern implementation. Register a command
 // handler and execute it.
-Wreqr.Commands = (function(Wreqr){
+Wreqr.Commands = (function(Wreqr, _){
   "use strict";
 
   return Wreqr.Handlers.extend({
@@ -16,14 +16,13 @@ Wreqr.Commands = (function(Wreqr){
       this._initializeStorage(this.options);
       this.on("handler:add", this._executeCommands, this);
 
-      var args = Array.prototype.slice.call(arguments);
-      Wreqr.Handlers.prototype.constructor.apply(this, args);
+      Wreqr.Handlers.prototype.constructor.apply(this, arguments);
     },
 
     // Execute a named command with the supplied args
-    execute: function(name, args){
+    execute: function(name){
       name = arguments[0];
-      args = Array.prototype.slice.call(arguments, 1);
+      var args = _.rest(arguments);
 
       if (this.hasHandler(name)){
         this.getHandler(name).apply(this, args);
@@ -61,4 +60,4 @@ Wreqr.Commands = (function(Wreqr){
     }
   });
 
-})(Wreqr);
+})(Wreqr, _);

@@ -2,7 +2,7 @@
 // --------------
 //
 // An object that lets you communicate with many channels.
-Wreqr.radio = (function(Wreqr){
+Wreqr.radio = (function(Wreqr, _){
   "use strict";
 
   var Radio = function() {
@@ -75,12 +75,11 @@ Wreqr.radio = (function(Wreqr){
   var proxyMethod = function(radio, system, method) {
     return function(channelName) {
       var messageSystem = radio._getChannel(channelName)[system];
-      var args = Array.prototype.slice.call(arguments, 1);
 
-      return messageSystem[method].apply(messageSystem, args);
+      return messageSystem[method].apply(messageSystem, _.rest(arguments));
     };
   };
 
   return new Radio();
 
-})(Wreqr);
+})(Wreqr, _);
