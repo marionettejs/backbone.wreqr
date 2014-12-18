@@ -1,5 +1,9 @@
 # Change log
 
+### v1.3.2
+  * Increase underscore range
+  * Minor underscore refactors
+
 ### v1.3.1
   * Fix UMD setup and build process
 
