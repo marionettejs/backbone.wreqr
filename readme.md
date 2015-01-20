@@ -15,7 +15,7 @@ isn't for quite some time: a few months, at the earliest. Also, we will support 
 so you won't run into any problems if you decide to continue using Wreqr.
 
 For an introduction to Radio, check out
-[our blog post](http://marionettejs.github.io/2014/07/11/introducing-backbone-radio/index.html). As of Marionette v2.1, you can easily
+[our blog post](http://blog.marionettejs.com/2014/07/11/introducing-backbone-radio/index.html). As of Marionette v2.1, you can easily
 swap in Radio for Wreqr with [this shim](https://gist.github.com/jmeas/7992474cdb1c5672d88b). We think you'll really like the changes!
 
 ## Downloads And Source
