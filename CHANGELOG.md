@@ -1,5 +1,8 @@
 # Change log
 
+### v1.3.4
+  * Bump version range of backbone.
+
 ### v1.3.3
   * Bump version range of backbone and underscore support.
   
