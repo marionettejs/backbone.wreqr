@@ -1,7 +1,7 @@
 {
   "name": "backbone.wreqr",
   "description": "A Simple Service Bus For Backbone and Backbone.Marionette",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "repo": "marionettejs/backbone.wreqr",
   "keywords": [
     "backbone",
@@ -12,7 +12,7 @@
     "client",
     "browser"
   ],
-  "license":  "MIT",
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT",
