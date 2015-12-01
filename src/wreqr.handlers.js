@@ -4,14 +4,14 @@
 
 Wreqr.Handlers = (function(Backbone, _){
   "use strict";
-  
+
   // Constructor
   // -----------
 
   var Handlers = function(options){
     this.options = options;
     this._wreqrHandlers = {};
-    
+
     if (_.isFunction(this.initialize)){
       this.initialize(options);
     }
@@ -41,6 +41,10 @@ Wreqr.Handlers = (function(Backbone, _){
     // Add a handler for the given name, with an
     // optional context to run the handler within
     setHandler: function(name, handler, context){
+      if (!handler) {
+        throw new Error('Expecting a valid handler as second argument');
+      }
+
       var config = {
         callback: handler,
         context: context

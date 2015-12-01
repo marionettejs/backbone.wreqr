@@ -56,4 +56,18 @@ describe("commands", function(){
     });
   });
 
+  describe("when not providing a valid handler", function(){
+    var commands;
+
+    beforeEach(function(){
+      commands = new Wreqr.Commands();
+    });
+
+    it("should throw an exception", function(){
+      expect(function(){
+        expect(commands.setHandler("handler-less command"))
+      }).toThrow();
+    })
+  });
+
 });
