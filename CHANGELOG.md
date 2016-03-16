@@ -1,5 +1,8 @@
 # Change log
 
+### v1.3.6
+  * Bump version range of backbone.
+
 ### v1.3.5
   * Bump version range of backbone.
 
