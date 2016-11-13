@@ -35,11 +35,11 @@ Wreqr.radio = (function(Wreqr, _){
     },
 
     _proxyMethods: function() {
-      _.each(['vent', 'commands', 'reqres'], function(system) {
-        _.each( messageSystems[system], function(method) {
+      _.each(['vent', 'commands', 'reqres'], _.bind(function(system) {
+        _.each( messageSystems[system], _.bind(function(method) {
           this[system][method] = proxyMethod(this, system, method);
-        }, this);
-      }, this);
+        }, this));
+      }, this));
     }
   });
 
