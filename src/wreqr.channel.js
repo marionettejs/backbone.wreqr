@@ -49,9 +49,9 @@ Wreqr.Channel = (function(Wreqr){
       context = context || this;
       var method = (type === 'vent') ? 'on' : 'setHandler';
 
-      _.each(hash, function(fn, eventName) {
+      _.each(hash, _.bind(function(fn, eventName) {
         this[type][method](eventName, _.bind(fn, context));
-      }, this);
+      }, this));
     }
   });
 
