@@ -38,7 +38,7 @@
     "test",
     "tests",
     "public",
-    "specs",
+    "spec",
     ".gitignore",
     ".jshintrc",
     ".travis.yml",
