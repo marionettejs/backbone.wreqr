@@ -1,4 +1,4 @@
-<h1 align="center">Backbone.Wreqr</h1>
+<h1 align="center">Backbone.Wreqr - DEPRECATED</h1>
 <p align="center">
   <a title='Build Status' href="https://travis-ci.org/marionettejs/backbone.wreqr">
     <img src='https://travis-ci.org/marionettejs/backbone.wreqr.svg' />
